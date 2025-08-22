@@ -1,0 +1,314 @@
+<div class="page-wrapper">
+
+  <!-- Preloader -->
+  <div class="preloader">
+    <div class="custom-loader"></div>
+  </div>
+
+  <!-- main header -->
+  <header [ngClass]="headerClass">
+    <!--Header-Upper-->
+    <div [ngClass]="headerUpperClass">
+      <div class="container-fluid clearfix">
+
+        <div class="header-inner rel d-flex align-items-center">
+          <div class="logo-outer">
+            <div class="logo"><a href="#"><img src="assets/images/logos/logo.png" alt="Logo" title="Logo"></a></div>
+          </div>
+
+          <div class="nav-outer mx-lg-auto ps-xxl-5 clearfix">
+            <!-- Main Menu -->
+            <nav class="main-menu navbar-expand-lg">
+              <div class="navbar-header">
+                <div class="mobile-logo">
+                  <a href="index.html">
+                    <img src="assets/images/logos/logo.png" alt="Logo" title="Logo">
+                  </a>
+                </div>
+
+                <!-- Toggle Button -->
+                <button type="button" class="navbar-toggle" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+              </div>
+
+              <div class="navbar-collapse collapse clearfix">
+                <ul class="navigation clearfix">
+                  <li class="dropdown current"><a href="#">صفحه اصلی</a>
+                    <ul>
+                      <li><a href="index.html">آژانس مسافرتی</a></li>
+                      <li><a href="index2.html">گشت شهری</a></li>
+                      <li><a href="index3.html">پکیج تور</a></li>
+                    </ul>
+                  </li>
+                  <li><a routerLink="/AboutUs">درباره ما</a></li>
+                  <li class="dropdown"><a href="#">تورها</a>
+                    <ul>
+                      <li><a (click)="goToTourList()" >تورها سبک 1</a></li>
+                      <li><a href="tour-grid.html">تورها سبک 2</a></li>
+                      <li><a href="tour-sidebar.html">تورها سبک 3</a></li>
+                      <li><a href="tour-details.html">جزئیات تور</a></li>
+                      <li><a href="tour-guide.html">راهنمای تور</a></li>
+                    </ul>
+                  </li>
+                  <li class="dropdown"><a href="#">مقصدها</a>
+                    <ul>
+                      <li><a href="destination1.html">مقصدها 1</a></li>
+                      <li><a href="destination2.html">مقصدها 2</a></li>
+                      <li><a href="destination-details.html">جزئیات مقصد</a></li>
+                    </ul>
+                  </li>
+                  <li class="dropdown"><a href="#">صفحات</a>
+                    <ul>
+                      <li><a href="pricing.html">قیمت ها</a></li>
+                      <li><a href="faqs.html">سوالات</a></li>
+                      <li class="dropdown"><a href="#">گالری</a>
+                        <ul>
+                          <li><a href="gellery-grid.html">گالری 1</a></li>
+                          <li><a href="gellery-slider.html">گالری 2</a></li>
+                        </ul>
+                      </li>
+                      <li class="dropdown"><a href="#">محصولات</a>
+                        <ul>
+                          <li><a href="shop.html">محصولات ما</a></li>
+                          <li><a href="product-details.html">جزئیات محصول</a></li>
+                        </ul>
+                      </li>
+                      <li><a href="contact.html">تماس با ما</a></li>
+                      <li><a href="404.html">خطای 404</a></li>
+                    </ul>
+                  </li>
+                  <li class="dropdown"><a href="#">وبلاگ</a>
+                    <ul>
+                      <li><a href="blog.html">وبلاگ</a></li>
+                      <li><a href="blog-details.html">جزئیات وبلاگ</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+
+            </nav>
+            <!-- Main Menu End-->
+          </div>
+
+          <!-- Nav Search -->
+          <div class="nav-search">
+            <button class="far fa-search"></button>
+            <form action="#" class="hide">
+              <input type="text" placeholder="جستجو" class="searchbox" required="">
+              <button type="submit" class="searchbutton far fa-search"></button>
+            </form>
+          </div>
+
+          <!-- Menu Button -->
+          <div class="menu-btns py-10">
+            <a href="contact.html" class="theme-btn style-two bgc-secondary">
+              <span data-hover="رزرو تور">رزرو تور</span>
+              <i class="fal fa-arrow-right"></i>
+            </a>
+            <!-- menu sidbar -->
+            <div class="menu-sidebar">
+              <button class="bg-transparent">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--End Header Upper-->
+  </header>
+
+  <!--Form Back Drop-->
+  <div class="form-back-drop"></div>
+
+  <!-- Hidden Sidebar -->
+  <section class="hidden-bar">
+    <div class="inner-box text-center">
+      <div class="cross-icon"><span class="fa fa-times"></span></div>
+      <div class="title">
+        <h4>رزرو تور گردشگری</h4>
+      </div>
+
+      <!--Appointment Form-->
+      <div class="appointment-form">
+        <form method="post" action="contact.html">
+          <div class="form-group">
+            <input type="text" name="text" value="" placeholder="نام" required>
+          </div>
+          <div class="form-group">
+            <input type="email" name="email" value="" placeholder="ایمیل" required>
+          </div>
+          <div class="form-group">
+            <textarea placeholder="پیام" rows="5"></textarea>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="theme-btn style-two">
+              <span data-hover="ارسال">ارسال</span>
+              <i class="fal fa-arrow-right"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!--Social Icons-->
+      <div class="social-style-one">
+        <a href="contact.html"><i class="fab fa-twitter"></i></a>
+        <a href="contact.html"><i class="fab fa-facebook-f"></i></a>
+        <a href="contact.html"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+      </div>
+    </div>
+  </section>
+  <!--End Hidden Sidebar -->
+
+  <router-outlet></router-outlet>
+  <!-- footer area start -->
+  <footer class="main-footer bgs-cover overlay rel z-1 pb-25"
+    style="background-image: url(assets/images/backgrounds/footer.jpg);">
+    <div class="container">
+      <div class="footer-top pt-100 pb-30">
+        <div class="row justify-content-between">
+          <div class="col-xl-5 col-lg-6" data-aos="fade-up" data-aos-duration="1500" data-aos-offset="50">
+            <div class="footer-widget footer-text">
+              <div class="footer-logo mb-25">
+                <a href="index.html"><img src="assets/images/logos/logo.png" alt="Logo"></a>
+              </div>
+              <p>ما برنامه‌های سفر سفارشی را مطابق با اولویت‌های شما تنظیم می‌کنیم، و مطمئن می‌شویم که هر سفری بدون
+                مشکل
+                است و جواهرات پنهان را غنی می‌کند.</p>
+              <div class="social-style-one mt-15">
+                <a href="contact.html"><i class="fab fa-facebook-f"></i></a>
+                <a href="contact.html"><i class="fab fa-youtube"></i></a>
+                <a href="contact.html"><i class="fab fa-pinterest"></i></a>
+                <a href="contact.html"><i class="fab fa-twitter"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-5 col-lg-6" data-aos="fade-up" data-aos-delay="50" data-aos-duration="1500"
+            data-aos-offset="50">
+            <div class="section-title counter-text-wrap mb-35">
+              <h2>عضویت در خبرنامه</h2>
+              <p>یک سایت <span class="count-text plus" data-speed="3000" data-stop="34500">0</span> محبوب ترین تجربه
+                ای
+                که به یاد خواهید آورد</p>
+            </div>
+            <form class="newsletter-form mb-50" action="#">
+              <input id="news-email" type="email" placeholder="آدرس ایمیل" required>
+              <button type="submit" class="theme-btn bgc-secondary style-two">
+                <span data-hover="اشتراک">اشتراک</span>
+                <i class="fal fa-arrow-right"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="widget-area pt-95 pb-45">
+      <div class="container">
+        <div class="row row-cols-xl-5 row-cols-lg-4 row-cols-md-3 row-cols-2">
+          <div class="col col-small" data-aos="fade-up" data-aos-duration="1500" data-aos-offset="50">
+            <div class="footer-widget footer-links">
+              <div class="footer-title">
+                <h5>خدمات</h5>
+              </div>
+              <ul class="list-style-three">
+                <li><a href="destination-details.html">بهترین راهنمای تور</a></li>
+                <li><a href="destination-details.html">رزرو تور</a></li>
+                <li><a href="destination-details.html">رزرو هتل</a></li>
+                <li><a href="destination-details.html">رزرو بلیط</a></li>
+                <li><a href="destination-details.html">خدمات اجاره ای</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col col-small" data-aos="fade-up" data-aos-delay="50" data-aos-duration="1500"
+            data-aos-offset="50">
+            <div class="footer-widget footer-links">
+              <div class="footer-title">
+                <h5>شرکت</h5>
+              </div>
+              <ul class="list-style-three">
+                <li><a href="about.html">درباره شرکت</a></li>
+                <li><a href="blog.html">وبلاگ انجمن</a></li>
+                <li><a href="contact.html">مشاغل</a></li>
+                <li><a href="blog.html">آخرین وبلاگ</a></li>
+                <li><a href="contact.html">تماس با ما</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col col-small" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1500"
+            data-aos-offset="50">
+            <div class="footer-widget footer-links">
+              <div class="footer-title">
+                <h5>مقصدها</h5>
+              </div>
+              <ul class="list-style-three">
+                <li><a href="destination-details.html">سافاری آفریقا</a></li>
+                <li><a href="destination-details.html">آلاسکا و کانادا</a></li>
+                <li><a href="destination-details.html">آمریکای جنوبی</a></li>
+                <li><a href="destination-details.html">خاورمیانه</a></li>
+                <li><a href="destination-details.html">آمریکای جنوبی</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col col-small" data-aos="fade-up" data-aos-delay="150" data-aos-duration="1500"
+            data-aos-offset="50">
+            <div class="footer-widget footer-links">
+              <div class="footer-title">
+                <h5>دسته بندی ها</h5>
+              </div>
+              <ul class="list-style-three">
+                <li><a href="contact.html">ماجراجویی</a></li>
+                <li><a href="contact.html">پیاده روی</a></li>
+                <li><a href="contact.html">دوچرخه سواری</a></li>
+                <li><a href="contact.html">تورهای خانوادگی</a></li>
+                <li><a href="contact.html">تورهای حیات وحش</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col col-md-6 col-10 col-small" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1500"
+            data-aos-offset="50">
+            <div class="footer-widget footer-contact">
+              <div class="footer-title">
+                <h5>راه های ارتباطی</h5>
+              </div>
+              <ul class="list-style-one">
+                <li><i class="fal fa-map-marked-alt"></i> تهران ، زعفرانیه ، خیابان مهر</li>
+                <li><i class="fal fa-envelope"></i> <a href="mailto:supportrevelo@gmail.com">supportrevelo
+                    gmail.com</a></li>
+                <li><i class="fal fa-clock"></i> دوشنبه - جمعه، 08 صبح تا 5 بعد از ظهر</li>
+                <li><i class="fal fa-phone-volume"></i> <a href="callto:+88012334588">0912 1234567</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom pt-20 pb-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-5">
+            <div class="copyright-text text-center text-lg-end">
+              <p>کپی رایت 1403 <a href="index.html">طاها مرادی</a>, تمامی حقوق محفوظ است</p>
+            </div>
+          </div>
+          <div class="col-lg-7 text-center text-lg-start">
+            <ul class="footer-bottom-nav">
+              <li><a href="about.html">شرایط</a></li>
+              <li><a href="about.html">سیاست حفظ حریم خصوصی</a></li>
+              <li><a href="about.html">اطلاعیه حقوقی</a></li>
+              <li><a href="about.html">قابلیت دسترسی</a></li>
+            </ul>
+          </div>
+        </div>
+        <!-- Scroll Top Button -->
+        <button class="scroll-top scroll-to-target" data-target="html"><img src="assets/images/icons/scroll-up.png"
+            alt="Scroll  Up"></button>
+      </div>
+    </div>
+  </footer>
+</div>
