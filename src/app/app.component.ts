@@ -31,7 +31,7 @@ export class App {
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe(event => {
         const url = event.urlAfterRedirects;
-        if (url.startsWith('/TourList') || url.startsWith('/AboutUs') || url.startsWith('/404')) {
+        if (url.startsWith('/TourList') || url.startsWith('/AboutUs') || url.startsWith('/404' ) || url.startsWith('/TourDetails' )) {
           this.headerClass = 'main-header header-one';
           this.headerUpperClass = 'header-upper bg-white py-30 rpy-0'
         } else {
@@ -50,6 +50,6 @@ export class App {
 
 
   goToTourList() {
-    this.router.navigate(['/TourList']);
+    this.router.navigate(['/TourList']).then(r => {});
   }
 }

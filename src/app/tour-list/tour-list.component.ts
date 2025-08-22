@@ -6,6 +6,7 @@ import { BasePaginationFilter } from '../Models/BasePaginationFilter';
 import { TourList } from '../Models/Tour/TourList';
 import { HttpClientModule } from '@angular/common/http';
 import { PluginInitializer } from '../services/plugin-initializer';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-tour-list',
@@ -20,7 +21,7 @@ export class TourListComponent implements OnInit {
   tourOrderFilterEnum = TourOrderFilter;
   TourPaginationFilter: TourPaginationFilter = new TourPaginationFilter()
   TourList: TourList[] = [];
-  constructor(private el: ElementRef, private renderer: Renderer2, private pluginNotifyService: PluginNotifyService,
+  constructor(private el: ElementRef,private router: Router ,private renderer: Renderer2, private pluginNotifyService: PluginNotifyService,
     private tourService: TourService, private PluginInitializer: PluginInitializer
   ) {
   }
@@ -94,6 +95,9 @@ export class TourListComponent implements OnInit {
     }
     this.BasePaginationFilter.Filters = this.TourPaginationFilter;
     this.BindTourListPagination();
+  }
+  goToDetails() {
+    this.router.navigate(['/TourDetails']).then(r => {});
   }
 
 }
