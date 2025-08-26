@@ -1,0 +1,82 @@
+<div class="overlay" id="overlay" [class.active]="!isSidebarOpen" (click)="closeSidebar()"></div>
+
+<div class="container-fluid p-0">
+  <div class="row g-0">
+    <!-- Sidebar -->
+    <div class="col-auto sidebar" id="sidebar" [class.show]="isSidebarOpen" (click)="$event.stopPropagation()">
+      <div class="sidebar-header">
+        <h2 class="mb-0">پنل مدیریت تورها</h2>
+      </div>
+      <div class="sidebar-menu">
+        <a href="#" class="menu-item active">
+          <i class="bi bi-speedometer2"></i>
+          <span>داشبورد</span>
+        </a>
+        <a (click)="goToTourList()" class="menu-item">
+          <i class="bi bi-house-door"></i>
+          <span>مدیریت تور ها</span>
+        </a>
+        <a (click)="goToLocationList()" class="menu-item">
+          <i class="bi bi-water"></i>
+          <span>مدیریت مقاصد (مکان ها)</span>
+        </a>
+        <a href="#" class="menu-item">
+          <i class="bi bi-fish"></i>
+          <span>مدیریت رزرو تور ها</span>
+        </a>
+        <a href="#" class="menu-item">
+          <i class="bi bi-bicycle"></i>
+          <span>مدیریت نقش ها</span>
+        </a>
+        <a href="#" class="menu-item">
+          <i class="bi bi-people"></i>
+          <span>مدیریت کاربران</span>
+        </a>
+        <a href="#" class="menu-item">
+          <i class="bi bi-gear"></i>
+          <span>تنظیمات</span>
+        </a>
+      </div>
+    </div>
+    <div class="col main-content" id="mainContent">
+
+      <!-- Header -->
+      <div class="header sticky-top p-3 d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center">
+          <button class="btn btn-sm btn-outline-primary me-2 d-lg-none" id="menuToggle" (click)="toggleSidebar($event)">
+            <i class="bi bi-list"></i>
+          </button>
+          <div class="input-group d-none d-md-flex" style="max-width: 300px;">
+                            <span class="input-group-text bg-transparent border-end-0">
+                                <i class="bi bi-search"></i>
+                            </span>
+            <input type="text" class="form-control border-start-0" placeholder="جستجو...">
+          </div>
+        </div>
+        <div class="d-flex align-items-center">
+          <div class="dropdown">
+            <button class="btn btn-link text-dark text-decoration-none dropdown-toggle d-flex align-items-center"
+                    type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              <div class="bg-primary rounded-circle d-flex justify-content-center align-items-center me-2"
+                   style="width: 40px; height: 40px;">
+                <span class="text-white fw-bold">AD</span>
+              </div>
+              <span class="d-none d-md-inline">مدیر سیستم</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+              <li><a class="dropdown-item" href="#">پروفایل</a></li>
+              <li><a class="dropdown-item" href="#">تنظیمات</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">خروج</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <router-outlet></router-outlet>
+    </div>
+
+  </div>
+</div>
+

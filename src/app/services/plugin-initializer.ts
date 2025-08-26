@@ -30,7 +30,6 @@ export class PluginInitializer {
 
 
   public initAOS(update: boolean = false) {
-    debugger
     if (typeof AOS !== 'undefined') {
       if (update) {
         AOS.refreshHard();
