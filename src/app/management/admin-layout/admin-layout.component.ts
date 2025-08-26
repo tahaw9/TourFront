@@ -1,4 +1,4 @@
-import {Component, HostListener, OnInit, Renderer2, ViewEncapsulation} from '@angular/core';
+import {Component, HostListener, OnInit, Renderer2} from '@angular/core';
 import {Router, RouterOutlet} from '@angular/router';
 
 @Component({
