@@ -1,0 +1,160 @@
+<div class="tour-management-container">
+  <!-- هدر صفحه -->
+  <div class="header-section">
+    <h1 class="page-title">
+      <i class="bi bi-geo-alt-fill"></i>
+      مدیریت تورها
+    </h1>
+    <div class="action-buttons">
+      <button class="btn btn-outline">
+        <i class="bi bi-filter"></i>
+        فیلترها
+      </button>
+      <button class="btn btn-primary">
+        <i class="bi bi-plus-circle"></i>
+        افزودن تور جدید
+      </button>
+    </div>
+  </div>
+
+  <!-- بخش فیلترها -->
+  <div class="filter-section">
+    <div class="filter-group">
+      <label class="filter-label">جستجو</label>
+      <input type="text" class="filter-input" placeholder="نام تور یا مقصد...">
+    </div>
+    <div class="shop-shorter filter-group rel z-3">
+      <select class="select-nice ms-xl-auto TourType-cmb">
+        @for (tourType of TourTypeCombo; track tourType.Guid) {
+          <option (click)="tourTypeFilterChange(tourType.Guid)" [value]="tourType.Guid" selected="">{{tourType.Name}}</option>
+        }
+      </select>
+      <select class="select-nice ms-xl-auto">
+        <option value="default" selected="">وضعیت</option>
+        <option value="1-star">1 ستاره</option>
+        <option value="2-star">2 ستاره</option>
+        <option value="3-star">3 ستاره</option>
+        <option value="4-star">4 ستاره</option>
+        <option value="5-star">5 ستاره</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <button class="btn btn-primary" style="height: 45px;">
+        اعمال فیلترها
+      </button>
+    </div>
+  </div>
+
+
+  <!-- کارت‌های آمار -->
+  <div class="stats-cards">
+    <div class="stat-card">
+      <div class="stat-icon icon-primary">
+        <i class="bi bi-house-door"></i>
+      </div>
+      <div class="stat-info">
+        <h3>۴۲</h3>
+        <p>چادرگردانی</p>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon icon-success">
+        <i class="bi bi-water"></i>
+      </div>
+      <div class="stat-info">
+        <h3>۲۸</h3>
+        <p>کایاک سواری</p>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon icon-warning">
+        <i class="bi bi-bicycle"></i>
+      </div>
+      <div class="stat-info">
+        <h3>۳۵</h3>
+        <p>دوچرخه سواری</p>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon icon-danger">
+        <i class="bi bi-fish"></i>
+      </div>
+      <div class="stat-info">
+        <h3>۱۹</h3>
+        <p>ماهیگیری</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- جدول تورها -->
+  <div class="tours-table-container">
+    <div class="table-header">
+      <h3 class="table-title">لیست تورها</h3>
+      <div class="search-box">
+        <input type="text" class="search-input" placeholder="جستجوی تور...">
+        <i class="bi bi-search search-icon"></i>
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <table class="tours-table">
+        <thead>
+        <tr>
+          <th>نام تور</th>
+          <th>نوع</th>
+          <th>مبدا</th>
+          <th>حمل و نقل</th>
+          <th>مقصد</th>
+          <th>قیمت</th>
+          <th>وضعیت</th>
+          <th>عملیات</th>
+        </tr>
+        </thead>
+        <tbody>
+          @for (tour of TourList; track $index) {
+            <tr>
+              <td>{{ tour.Title }}</td>
+              <td>{{tour.TourTypeName}}</td>
+              <td>{{tour.OriginName}}</td>
+              <td>{{tour.TransportTypeName}}</td>
+              <td>{{tour.DestinationName}}</td>
+              <td>{{tour.Price | number}}</td>
+              <td><span class="status-badge status-active">فعال</span></td>
+              <td>
+                <div class="action-buttons">
+                  <button class="action-btn btn-view"><i class="bi bi-eye"></i></button>
+                  <button (click)="OpenEditForm(tour)" class="action-btn btn-edit"><i class="bi bi-pencil"></i></button>
+                  <button class="action-btn btn-delete"><i class="bi bi-trash"></i></button>
+                </div>
+              </td>
+            </tr>
+
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <!-- صفحه‌بندی -->
+    <div class="pagination">
+      <button class="page-btn"><i class="bi bi-chevron-right"></i></button>
+      @for (a of Array.from({ length: (30 / 10) }); track $index) {
+        <button
+          (click)="ChangePageNumberAndReBind($index + 1)"
+          [class.active]="BasePaginationFilter.PageNumber == $index + 1"
+          class="page-btn">
+          {{$index + 1}}
+        </button>
+      }
+      <button class="page-btn"><i class="bi bi-chevron-left"></i></button>
+    </div>
+  </div>
+</div>
+
+<!--<script>-->
+<!--  document.querySelectorAll('.page-btn').forEach(btn => {-->
+<!--    btn.addEventListener('click', function () {-->
+<!--      document.querySelectorAll('.page-btn').forEach(b => b.classList.remove('active'));-->
+<!--      this.classList.add('active');-->
+<!--    });-->
+<!--  });-->
+<!--</script>-->

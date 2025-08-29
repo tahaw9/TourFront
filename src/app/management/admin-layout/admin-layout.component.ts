@@ -1,5 +1,6 @@
 import {Component, HostListener, OnInit, Renderer2} from '@angular/core';
 import {Router, RouterOutlet} from '@angular/router';
+import {HttpClientModule} from '@angular/common/http';
 
 @Component({
   selector: 'app-admin-layout',
@@ -61,11 +62,16 @@ export class AdminLayoutComponent implements OnInit {
   }
 
   goToLocationList() {
-    this.router.navigate(['/ManageLocations']).then(r => {
+    this.router.navigate(['/admin/ManageLocations']).then(r => {
     });
   }
   goToTourList() {
-    this.router.navigate(['/ManageTours']).then(r => {
+    debugger
+    this.router.navigate(['/admin/ManageTours']).then(r => {
+    });
+  }
+  dashboard(){
+    this.router.navigate(['/admin']).then(r => {
     });
   }
 

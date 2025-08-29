@@ -1,10 +1,6 @@
 <div class="page-wrapper">
 
 
-
-
-
-
   <!-- Hero Area Start -->
   <section class="hero-area bgc-black pt-200 rpt-120 rel z-2">
     <div class="container-fluid">
@@ -29,7 +25,7 @@
           <select class="select-nice" class="select-nice TourType-cmb" name="activity" id="activity">
             <option>انتخاب کنید</option>
             @for (TourType of TourTypes; track $index) {
-            <option [value]="TourType.Guid">{{TourType.Name}}</option>
+              <option [value]="TourType.Guid">{{ TourType.Name }}</option>
             }
           </select>
         </div>
@@ -37,8 +33,8 @@
           <div class="icon"><i class="fal fa-calendar-alt"></i></div>
           <span class="title">تاریخ حرکت</span>
           <div>
-            <qeydar-date-picker  [minDate]="today" [(ngModel)]="SearchDate"
-              [calendarType]="'jalali'" placeholder="تاریخ انتخاب کنید"></qeydar-date-picker>
+            <qeydar-date-picker [minDate]="today" [(ngModel)]="SearchDate"
+                                [calendarType]="'jalali'" placeholder="تاریخ انتخاب کنید"></qeydar-date-picker>
           </div>
         </div>
         <div class="filter-item clearfix">
@@ -68,7 +64,7 @@
       <div class="row justify-content-center">
         <div class="col-lg-12">
           <div class="section-title text-white text-center counter-text-wrap mb-70" data-aos="fade-up"
-            data-aos-duration="1500" data-aos-offset="50">
+               data-aos-duration="1500" data-aos-offset="50">
             <h2>مکان های دیدنی جهان را با راولو سفر کنید</h2>
             <p>یک سایت <span class="count-text plus" data-speed="3000" data-stop="34500">0</span> محبوب ترین تجربه ای که
               به یاد خواهید آورد</p>
@@ -96,7 +92,7 @@
         </div>
         <div class="col-xxl-3 col-xl-4 col-md-6">
           <div class="destination-item" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1500"
-            data-aos-offset="50">
+               data-aos-offset="50">
             <div class="image">
               <div class="ratting"><i class="fas fa-star"></i> 4.8</div>
               <a href="#" class="heart"><i class="fas fa-heart"></i></a>
@@ -115,7 +111,7 @@
         </div>
         <div class="col-xxl-3 col-xl-4 col-md-6">
           <div class="destination-item" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1500"
-            data-aos-offset="50">
+               data-aos-offset="50">
             <div class="image">
               <div class="ratting"><i class="fas fa-star"></i> 4.8</div>
               <a href="#" class="heart"><i class="fas fa-heart"></i></a>
@@ -134,7 +130,7 @@
         </div>
         <div class="col-xxl-3 col-xl-4 col-md-6">
           <div class="destination-item" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1500"
-            data-aos-offset="50">
+               data-aos-offset="50">
             <div class="image">
               <div class="ratting"><i class="fas fa-star"></i> 4.8</div>
               <a href="#" class="heart"><i class="fas fa-heart"></i></a>
@@ -168,7 +164,9 @@
             </div>
             <p>ما فراتر از آن می رویم تا رویاهای سفر شما را به گوهرهای پنهان و جاذبه های دیدنی تبدیل کنیم</p>
             <div class="divider counter-text-wrap mt-45 mb-55"><span>ما <span><span class="count-text plus"
-                    data-speed="3000" data-stop="25">0</span> سال</span> تجربه داریم</span></div>
+                                                                                    data-speed="3000"
+                                                                                    data-stop="25">0</span> سال</span> تجربه داریم</span>
+            </div>
             <div class="row">
               <div class="col-6">
                 <div class="counter-item counter-text-wrap">
@@ -214,7 +212,7 @@
         <div class="row justify-content-center">
           <div class="col-lg-12">
             <div class="section-title text-center counter-text-wrap mb-70" data-aos="fade-up" data-aos-duration="1500"
-              data-aos-offset="50">
+                 data-aos-offset="50">
               <h2>جستجو در مقصدهای محبوب</h2>
               <p>یک سایت <span class="count-text plus" data-speed="3000" data-stop="34500">0</span> محبوب ترین تجربه</p>
             </div>
@@ -237,7 +235,7 @@
             </div>
             <div class="col-xl-3 col-md-6">
               <div class="destination-item style-two" data-aos="flip-up" data-aos-delay="100" data-aos-duration="1500"
-                data-aos-offset="50">
+                   data-aos-offset="50">
                 <div class="image">
                   <a href="#" class="heart"><i class="fas fa-heart"></i></a>
                   <img src="assets/images/destinations/destination2.jpg" alt="Destination">
@@ -251,7 +249,7 @@
             </div>
             <div class="col-md-6">
               <div class="destination-item style-two" data-aos="flip-up" data-aos-delay="200" data-aos-duration="1500"
-                data-aos-offset="50">
+                   data-aos-offset="50">
                 <div class="image">
                   <a href="#" class="heart"><i class="fas fa-heart"></i></a>
                   <img src="assets/images/destinations/destination3.jpg" alt="Destination">
@@ -278,7 +276,7 @@
             </div>
             <div class="col-xl-3 col-md-6">
               <div class="destination-item style-two" data-aos="flip-up" data-aos-delay="100" data-aos-duration="1500"
-                data-aos-offset="50">
+                   data-aos-offset="50">
                 <div class="image">
                   <a href="#" class="heart"><i class="fas fa-heart"></i></a>
                   <img src="assets/images/destinations/destination5.jpg" alt="Destination">
@@ -292,7 +290,7 @@
             </div>
             <div class="col-xl-3 col-md-6">
               <div class="destination-item style-two" data-aos="flip-up" data-aos-delay="200" data-aos-duration="1500"
-                data-aos-offset="50">
+                   data-aos-offset="50">
                 <div class="image">
                   <a href="#" class="heart"><i class="fas fa-heart"></i></a>
                   <img src="assets/images/destinations/destination6.jpg" alt="Destination">
@@ -334,7 +332,9 @@
                 </div>
                 <h6>850K+ مشتری راضی</h6>
                 <div class="divider style-two counter-text-wrap my-25"><span><span class="count-text plus"
-                      data-speed="3000" data-stop="25">0</span> سال</span></div>
+                                                                                   data-speed="3000"
+                                                                                   data-stop="25">0</span> سال</span>
+                </div>
                 <p>ما به خود افتخار می کنیم که برنامه های سفر شخصی را ارائه می دهیم</p>
               </div>
             </div>
@@ -388,7 +388,7 @@
       <div class="row justify-content-center">
         <div class="col-lg-12">
           <div class="section-title text-white text-center counter-text-wrap mb-70" data-aos="fade-up"
-            data-aos-duration="1500" data-aos-offset="50">
+               data-aos-duration="1500" data-aos-offset="50">
             <h2>برترین هتل های جهان</h2>
             <p>یک سایت <span class="count-text plus" data-speed="3000" data-stop="34500">0</span> محبوب ترین تجربه ای که
               به یاد خواهید آورد</p>
@@ -421,7 +421,7 @@
         </div>
         <div class="col-xxl-6 col-xl-8 col-lg-10">
           <div class="destination-item style-three" data-aos="fade-up" data-aos-delay="50" data-aos-duration="1500"
-            data-aos-offset="50">
+               data-aos-offset="50">
             <div class="image">
               <div class="ratting"><i class="fas fa-star"></i> 4.8</div>
               <a href="#" class="heart"><i class="fas fa-heart"></i></a>
@@ -468,7 +468,7 @@
         </div>
         <div class="col-xxl-6 col-xl-8 col-lg-10">
           <div class="destination-item style-three" data-aos="fade-up" data-aos-delay="50" data-aos-duration="1500"
-            data-aos-offset="50">
+               data-aos-offset="50">
             <div class="content">
               <span class="location"><i class="fal fa-map-marker-alt"></i> آئو نانگ، تایلند</span>
               <h5><a href="#">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم</a></h5>
@@ -530,10 +530,10 @@
             <div class="bg"><img src="assets/images/mobile-app/phone-bg.png" alt="BG"></div>
             <div class="images">
               <img src="assets/images/mobile-app/phone2.png" alt="Phone" data-aos="fade-down-right"
-                data-aos-duration="1500" data-aos-offset="50">
+                   data-aos-duration="1500" data-aos-offset="50">
               <img src="assets/images/mobile-app/phone.png" alt="Phone">
               <img src="assets/images/mobile-app/phone3.png" alt="Phone" data-aos="fade-up-left"
-                data-aos-duration="1500" data-aos-offset="50">
+                   data-aos-duration="1500" data-aos-offset="50">
             </div>
           </div>
         </div>
@@ -550,7 +550,7 @@
         <div class="row">
           <div class="col-lg-5 rel" data-aos="fade-left" data-aos-duration="1500" data-aos-offset="50">
             <div class="testimonial-left-image rmb-55"
-              style="background-image: url(assets/images/testimonials/testimonial-left.jpg);"></div>
+                 style="background-image: url(assets/images/testimonials/testimonial-left.jpg);"></div>
           </div>
           <div class="col-lg-7">
             <div class="testimonial-right-content" data-aos="fade-right" data-aos-duration="1500" data-aos-offset="50">
@@ -571,7 +571,8 @@
                     </div>
                   </div>
                   <div class="text">"سفر ما کاملاً عالی بود، با تشکر از این آژانس مسافرتی! آنها از همه جزئیات، از محل
-                    اقامت گرفته تا محل اقامت، مراقبت کردند و حتی تجربیات باورنکردنی را پیشنهاد کردند"</div>
+                    اقامت گرفته تا محل اقامت، مراقبت کردند و حتی تجربیات باورنکردنی را پیشنهاد کردند"
+                  </div>
                   <div class="author">
                     <div class="image"><img src="assets/images/testimonials/author.jpg" alt="Author"></div>
                     <div class="content">
@@ -593,7 +594,8 @@
                     </div>
                   </div>
                   <div class="text">"سفر ما کاملاً عالی بود، با تشکر از این آژانس مسافرتی! آنها از همه جزئیات، از محل
-                    اقامت گرفته تا محل اقامت، مراقبت کردند و حتی تجربیات باورنکردنی را پیشنهاد کردند"</div>
+                    اقامت گرفته تا محل اقامت، مراقبت کردند و حتی تجربیات باورنکردنی را پیشنهاد کردند"
+                  </div>
                   <div class="author">
                     <div class="image"><img src="assets/images/testimonials/author.jpg" alt="Author"></div>
                     <div class="content">
@@ -627,7 +629,7 @@
           </div>
         </div>
         <div class="col-xl-4 col-md-6" data-aos="zoom-in-down" data-aos-delay="50" data-aos-duration="1500"
-          data-aos-offset="50">
+             data-aos-offset="50">
           <div class="cta-item" style="background-image: url(assets/images/cta/cta2.jpg);">
             <span class="category">ساحل دریا</span>
             <h2>بزرگترین ساحل دریای جهان در تایلند</h2>
@@ -638,7 +640,7 @@
           </div>
         </div>
         <div class="col-xl-4 col-md-6" data-aos="zoom-in-down" data-aos-delay="100" data-aos-duration="1500"
-          data-aos-offset="50">
+             data-aos-offset="50">
           <div class="cta-item" style="background-image: url(assets/images/cta/cta3.jpg);">
             <span class="category">بزرگترین آبشار</span>
             <h2>بزرگترین آبشار بالی، اندونزی</h2>
@@ -660,7 +662,7 @@
       <div class="row justify-content-center">
         <div class="col-lg-12">
           <div class="section-title text-center counter-text-wrap mb-70" data-aos="fade-up" data-aos-duration="1500"
-            data-aos-offset="50">
+               data-aos-offset="50">
             <h2>آخرین اخبار و وبلاگ</h2>
             <p>یک سایت <span class="count-text plus" data-speed="3000" data-stop="34500">0</span> محبوب ترین تجربه ای که
               به یاد خواهید آورد</p>
@@ -731,7 +733,3 @@
   <!-- Blog Area end -->
 
 </div>
-
-<script src="../../assets/js/jquery-3.6.0.min.js"></script>
-<script src="../../assets/js/jquery.nice-select.min.js"></script>
-<link rel="stylesheet" href="../../assets/css/nice-select.min.css" />

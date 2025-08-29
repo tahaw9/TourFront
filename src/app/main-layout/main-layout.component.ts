@@ -39,5 +39,10 @@ export class MainLayoutComponent implements OnInit {
     this.router.navigate(['/TourList']).then(r => {
     });
   }
+  goToAboutUs() {
+    this.router.navigate(['/AboutUs']).then(r => {
+    });
+  }
+
 
 }
