@@ -3,21 +3,21 @@ import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { LocationListComponent } from './location-list.component';
+import { ManageLocationListComponent } from './manage-location-list.component';
 
-describe('LocationListComponent', () => {
-  let component: LocationListComponent;
-  let fixture: ComponentFixture<LocationListComponent>;
+describe('ManageLocationListComponent', () => {
+  let component: ManageLocationListComponent;
+  let fixture: ComponentFixture<ManageLocationListComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ LocationListComponent ]
+      declarations: [ ManageLocationListComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LocationListComponent);
+    fixture = TestBed.createComponent(ManageLocationListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

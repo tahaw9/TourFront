@@ -12,11 +12,16 @@ import {HttpClientModule} from '@angular/common/http';
 })
 export class AdminLayoutComponent implements OnInit {
   isSidebarOpen: boolean = false;
+  IsLandscape: boolean = true;
 
   constructor(private renderer: Renderer2, private router: Router) {
   }
 
   ngOnInit() {
+    this.checkWidth();
+  }
+
+  ngAfterViewInit() {
   }
 
   toggleSidebar(event: Event) {
@@ -31,18 +36,21 @@ export class AdminLayoutComponent implements OnInit {
       this.renderer.removeClass(document.body, 'sidebar-open');
     }
   }
+
   closeSidebar() {
     this.isSidebarOpen = false;
   }
+
   @HostListener('document:click', ['$event'])
   handleDocumentClick(event: Event) {
-    const sidebar =   document.getElementById('sidebar');
+    const sidebar = document.getElementById('sidebar');
     if (this.isSidebarOpen && sidebar && !sidebar.contains(event.target as Node)) {
-      if (window.innerWidth < 992){
+      if (window.innerWidth < 992) {
         this.closeSidebar();
       }
     }
   }
+
   @HostListener('window:resize')
   onResize() {
     this.checkWidth();
@@ -51,26 +59,27 @@ export class AdminLayoutComponent implements OnInit {
   checkWidth() {
     if (window.innerWidth < 992) {
       this.isSidebarOpen = false;
+      this.IsLandscape = false;
       this.renderer.removeClass(document.body, 'sidebar-open');
     } else {
+      this.IsLandscape = true;
       this.isSidebarOpen = true;
       this.renderer.addClass(document.body, 'sidebar-open');
     }
-  }
-  ngAfterViewInit() {
-    this.checkWidth();
   }
 
   goToLocationList() {
     this.router.navigate(['/admin/ManageLocations']).then(r => {
     });
   }
+
   goToTourList() {
     debugger
     this.router.navigate(['/admin/ManageTours']).then(r => {
     });
   }
-  dashboard(){
+
+  dashboard() {
     this.router.navigate(['/admin']).then(r => {
     });
   }

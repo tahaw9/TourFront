@@ -5,11 +5,11 @@ import {TourListComponent} from './tour-list/tour-list.component';
 import {NotFoundComponent} from './not-found/not-found.component';
 import {TourDetailsComponent} from './tour-details/tour-details.component';
 import {DashboardComponent} from './management/dashboard/dashboard.component';
-import {App} from './app.component';
 import {MainLayoutComponent} from './main-layout/main-layout.component';
 import {AdminLayoutComponent} from './management/admin-layout/admin-layout.component';
-import {LocationListComponent} from './management/location-list/location-list.component';
 import {ManageTourListComponent} from './management/manage-tour-list/manage-tour-list.component';
+import {ManageTourInsUpComponent} from './management/manage-tour-list/manage-tour-insUp/manage-tour-insUp.component';
+import {ManageLocationListComponent} from './management/manage-location-list/manage-location-list.component';
 export const routes: Routes = [
   {
     path: '',
@@ -28,8 +28,9 @@ export const routes: Routes = [
     component: AdminLayoutComponent,
     children: [
       { path: '', component: DashboardComponent }, // /admin
-      { path: 'ManageLocations', component: LocationListComponent },
-      { path: 'ManageTours', component: ManageTourListComponent }
+      { path: 'ManageLocations', component: ManageLocationListComponent },
+      { path: 'ManageTours', component: ManageTourListComponent },
+      { path: 'ManageTours/InsUp/:PageType', component: ManageTourInsUpComponent }
       // { path: 'users', component: AdminUsersComponent }, // /admin/users
       // بقیه routeهای پنل ادمین اینجا
     ]

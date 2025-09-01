@@ -1,3 +1,146 @@
-<p>
-  manage-tour-insUp works!
-</p>
+<div class="container-fluid p-4">
+  <div class="row mb-4">
+    <div class="col-12">
+      <h4 class="mb-0">افزودن تور جدید</h4>
+      <p class="text-muted">اطلاعات تور جدید را وارد کنید</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="form-container">
+        <form id="tourForm">
+          <!-- اطلاعات اصلی -->
+          <div class="form-section">
+            <h5 class="form-section-title">
+              <i class="bi bi-info-circle"></i>
+              اطلاعات اصلی تور
+            </h5>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="tourName" class="form-label">نام تور</label>
+                <input type="text" class="form-control" id="tourName" placeholder="نام تور را وارد کنید" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="tourTypeSelect" class="form-label">نوع تور</label>
+                <div class="shop-shorter rel z-3">
+                  <select class="select-nice ms-xl-auto TourType-cmb" name="tourTypeSelect">
+                    @for (tourType of TourTypeSelect; track tourType.Guid) {
+                      <option (click)="tourTypeSelectChange(tourType.Guid)" [value]="tourType.Guid" [selected]="incomingTour.TourTypeGuid == tourType.Guid">{{tourType.Name}}</option>
+                    }
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="tourDate" class="form-label">تاریخ برگزاری</label>
+                <div class="datepicker-container">
+                  <input type="date" class="form-control" id="tourDate" required>
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="participants" class="form-label">تعداد شرکت‌کنندگان</label>
+                <input type="number" class="form-control" id="participants" min="1" max="50"
+                       placeholder="تعداد را وارد کنید" required>
+              </div>
+              <div class="col-12 mb-3">
+                <label for="tourDescription" class="form-label">توضیحات تور</label>
+                <textarea class="form-control" id="tourDescription" rows="3"
+                          placeholder="توضیحات کامل درباره تور"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- محل برگزاری -->
+          <div class="form-section">
+            <h5 class="form-section-title">
+              <i class="bi bi-geo-alt"></i>
+              محل برگزاری
+            </h5>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="tourLocation" class="form-label">مکان</label>
+                <input type="text" class="form-control" id="tourLocation" placeholder="مکان برگزاری تور" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="tourDifficulty" class="form-label">سطح سختی</label>
+                <select class="form-select" id="tourDifficulty" required>
+                  <option value="easy">آسان</option>
+                  <option value="medium" selected>متوسط</option>
+                  <option value="hard">سخت</option>
+                  <option value="expert">خیلی سخت</option>
+                </select>
+              </div>
+              <div class="col-12 mb-3">
+                <label for="tourAddress" class="form-label">آدرس دقیق</label>
+                <textarea class="form-control" id="tourAddress" rows="2" placeholder="آدرس دقیق محل برگزاری"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- تصاویر -->
+          <div class="form-section">
+            <h5 class="form-section-title">
+              <i class="bi bi-image"></i>
+              تصاویر تور
+            </h5>
+            <div class="row">
+              <div class="col-12 mb-3">
+                <div class="image-upload-container" id="imageUpload">
+                  <div class="upload-icon">
+                    <i class="bi bi-cloud-arrow-up"></i>
+                  </div>
+                  <p>برای آپلود تصویر کلیک کنید یا آن را اینجا رها کنید</p>
+                  <p class="text-muted small">فرمت‌های مجاز: JPG, PNG, GIF - حداکثر سایز: 2MB</p>
+                  <input type="file" id="tourImage" accept="image/*" style="display: none;">
+                  <img id="imagePreview" class="image-preview" alt="پیش‌نمایش تصویر">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- قیمت و وضعیت -->
+          <div class="form-section">
+            <h5 class="form-section-title">
+              <i class="bi bi-tag"></i>
+              قیمت و وضعیت
+            </h5>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="tourPrice" class="form-label">قیمت (تومان)</label>
+                <input type="number" class="form-control" id="tourPrice" min="0" placeholder="قیمت به تومان" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="tourDiscount" class="form-label">تخفیف (%)</label>
+                <input type="number" class="form-control" id="tourDiscount" min="0" max="100" placeholder="درصد تخفیف">
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="tourStatus" class="form-label">وضعیت تور</label>
+                <select class="form-select" id="tourStatus" required>
+                  <option value="active" selected>فعال</option>
+                  <option value="inactive">غیرفعال</option>
+                  <option value="draft">پیش‌نویس</option>
+                </select>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="tourCapacity" class="form-label">ظرفیت تور</label>
+                <input type="number" class="form-control" id="tourCapacity" min="1" placeholder="حداکثر ظرفیت" required>
+              </div>
+            </div>
+          </div>
+
+          <!-- دکمه‌های فرم -->
+          <div class="row mt-4">
+            <div class="col-12 d-flex justify-content-end">
+              <button type="button" class="btn btn-outline-secondary me-2">
+                <i class="bi bi-x-circle"></i> انصراف
+              </button>
+              <button type="submit" class="btn btn-primary">
+                <i class="bi bi-check-circle"></i> ذخیره تور
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

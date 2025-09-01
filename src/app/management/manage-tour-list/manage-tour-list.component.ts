@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import {DatePickerComponent} from '@qeydar/datepicker';
 import {BasePaginationFilter} from '../../Models/BasePaginationFilter';
 import {TourPaginationFilter} from '../../Models/Tour/TourPaginationFilter';
 import {TourService} from '../../services/TourService';
@@ -79,7 +78,8 @@ export class ManageTourListComponent implements OnInit {
   }
 
   OpenEditForm(tour: TourList){
-    this.router.navigate(['/admin/TourOperation/' + tour.Guid + '/' + '2']).then(r => {
+    this.router.navigate(['/admin/ManageTours/InsUp/2'], {
+      state: { tour: tour }
     });
   }
 

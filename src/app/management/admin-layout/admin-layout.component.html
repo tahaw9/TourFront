@@ -1,4 +1,4 @@
-<div class="overlay" id="overlay" [class.active]="!isSidebarOpen" (click)="closeSidebar()"></div>
+<div class="overlay" id="overlay" [class.active]="isSidebarOpen && !IsLandscape" (click)="closeSidebar()"></div>
 
 <div class="container-fluid p-0">
   <div class="row g-0">
