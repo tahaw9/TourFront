@@ -29,7 +29,6 @@ export class TourListComponent implements OnInit {
   @ViewChild('orderSelect', { static: true }) orderSelectRef!: ElementRef<HTMLSelectElement>;
   ngOnInit() {
     this.pluginNotifyService.pluginInitialized$.subscribe(() => {
-      debugger
       this.importClickEvent();
       this.BindTourListPagination();
 
@@ -57,7 +56,6 @@ export class TourListComponent implements OnInit {
   }
 
   importClickEvent() {
-    debugger
     const lis = this.el.nativeElement.querySelectorAll('div.search-order-select ul li');
     lis.forEach((li: HTMLElement) => {
       this.renderer.listen(li, 'click', () => {

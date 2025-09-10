@@ -10,7 +10,9 @@ import {AdminLayoutComponent} from './management/admin-layout/admin-layout.compo
 import {ManageTourListComponent} from './management/manage-tour-list/manage-tour-list.component';
 import {ManageTourInsUpComponent} from './management/manage-tour-list/manage-tour-insUp/manage-tour-insUp.component';
 import {ManageLocationListComponent} from './management/manage-location-list/manage-location-list.component';
+import {LoginComponent} from './auth/login/login.component';
 export const routes: Routes = [
+  {path: 'login', component: LoginComponent },
   {
     path: '',
     component: MainLayoutComponent,

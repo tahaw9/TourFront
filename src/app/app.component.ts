@@ -1,6 +1,6 @@
 import {CommonModule} from '@angular/common';
 import {HttpClientModule} from '@angular/common/http';
-import {Component} from '@angular/core';
+import {Component, Renderer2} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -11,6 +11,7 @@ import {NavigationEnd, Router, RouterLink, RouterOutlet} from '@angular/router';
 import {PluginInitializer} from './services/plugin-initializer';
 import {filter} from 'rxjs/operators';
 import {PluginNotifyService} from './services/plugin-notify.service';
+import {UiPluginService} from './services/UiPluginService';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,7 @@ import {PluginNotifyService} from './services/plugin-notify.service';
   imports: [FormsModule, MatFormFieldModule, MatInputModule, RouterOutlet, MatFormFieldModule, MatInputModule, MatSelectModule, MatSelectModule, ReactiveFormsModule, MatDatepickerModule, CommonModule, HttpClientModule],
   templateUrl: './app.Component.html',
   styleUrl: './app.Component.scss',
-  providers: [PluginInitializer]
+  providers: [PluginInitializer, UiPluginService]
 })
 export class App {
   headerClass = 'main-header header-one white-menu menu-absolute';
@@ -27,7 +28,9 @@ export class App {
   constructor(
     private router: Router,
     private pluginService: PluginInitializer,
-    private pluginNotifyService: PluginNotifyService) {
+    private pluginNotifyService: PluginNotifyService,
+    private UiPlugin: UiPluginService,
+    private renderer: Renderer2) {
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe(event => {
@@ -35,8 +38,14 @@ export class App {
           setTimeout(() => {
             this.pluginService.initAll();
             this.pluginNotifyService.notifyPluginInitialized();
+            if (typeof (window as any).RaveloInit === 'function') (window as any).RaveloInit();
+            // this.UiPlugin.initAll();
           }, 0);
         }
       });
   }
+
+
+
+
 }

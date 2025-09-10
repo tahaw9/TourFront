@@ -1,0 +1,83 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="login-header">
+      <div class="login-icon">
+        <i class="bi bi-person-circle"></i>
+      </div>
+      <h1 class="login-title">ورود به حساب کاربری</h1>
+      <p class="login-subtitle">لطفا اطلاعات حساب کاربری خود را وارد کنید</p>
+    </div>
+
+    <!-- نمایش خطا -->
+    @if (error) {
+      <div class="alert alert-danger">
+        <i class="bi bi-exclamation-circle"></i>
+        {{ error }}
+      </div>
+    }
+
+    <!-- فرم لاگین -->
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <!-- فیلد نام کاربری -->
+      <div class="form-group">
+        <label for="username" class="form-label">نام کاربری</label>
+        <div class="input-icon">
+          <input type="text" formControlName="username" class="form-control"
+                 [class.is-invalid]="submitted && f['username'].errors"
+                 placeholder="نام کاربری خود را وارد کنید" required>
+          <i class="bi bi-person"></i>
+        </div>
+        @if (submitted && f['username'].errors != null) {
+          <div class="text-danger">
+            @if (f['username'].errors['required']) {
+              <small>نام کاربری ضروری است</small>
+            }
+            @if (f['username'].errors['pattern']){
+              <small>
+                شماره موبایل باید ۱۱ رقم و با 09 شروع شود
+              </small>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- فیلد رمز عبور -->
+      <div class="form-group">
+        <label for="password" class="form-label">رمز عبور</label>
+        <div class="input-icon">
+          <input type="password" formControlName="password" class="form-control"
+                 [class.is-invalid]="submitted && f['password'].errors"
+                 placeholder="رمز عبور خود را وارد کنید" required>
+          <i class="bi bi-lock"></i>
+        </div>
+        @if (submitted && f['password'].errors) {
+          <div class="text-danger">
+            @if (f['password'].errors['required']) {
+              <small>رمز عبور ضروری است</small>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- گزینه‌های اضافی -->
+      <div class="login-options">
+        <div class="remember-me">
+          <input type="checkbox" formControlName="rememberMe" id="rememberMe">
+          <label for="rememberMe">مرا به خاطر بسپار</label>
+        </div>
+        <a href="#" class="forgot-password">رمز عبور را فراموش کرده‌اید؟</a>
+      </div>
+
+      <!-- دکمه ورود -->
+      <button type="submit" class="login-button" [disabled]="loading">
+        <i class="bi bi-box-arrow-in-left"></i>
+        {{ loading ? 'در حال ورود...' : 'ورود به سیستم' }}
+      </button>
+    </form>
+
+    <!-- فوتر فرم -->
+    <div class="login-footer">
+      حساب کاربری ندارید؟ <a href="#">ثبت نام کنید</a>
+    </div>
+  </div>
+</div>

@@ -11,6 +11,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {BaseResponse} from '../../Models/BaseResponse';
 import {TourTypeService} from '../../services/TourTypeService';
 import {TourType} from '../../Models/TourType/TourType';
+import {AuthService} from '../../services/AuthService';
 
 @Component({
   selector: 'app-manage-tour-list',
@@ -21,7 +22,7 @@ import {TourType} from '../../Models/TourType/TourType';
     HttpClientModule
   ],
   styleUrls: ['./manage-tour-list.component.scss'],
-  providers: [TourService, TourTypeService]
+  providers: [TourService, TourTypeService, AuthService]
 })
 export class ManageTourListComponent implements OnInit {
 
@@ -30,7 +31,7 @@ export class ManageTourListComponent implements OnInit {
   TourTypeCombo: TourType[] = [];
   TourListBaseResponse: BaseResponse<TourList[]> = new BaseResponse<TourList[]>();
   TourTypeGuidFilter: string = "";
-  constructor(private tourService: TourService,private TourTypeService: TourTypeService, private PluginInitializer: PluginInitializer,private router: Router) { }
+  constructor(private tourService: TourService,private TourTypeService: TourTypeService, private AuthService: AuthService, private PluginInitializer: PluginInitializer,private router: Router) { }
 
   ngOnInit() {
     this.BasePaginationFilter.PageSize = 10;

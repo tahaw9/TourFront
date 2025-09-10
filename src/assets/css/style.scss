@@ -8934,7 +8934,10 @@ blockquote {
   left: 20px;
   margin-top: -5px;
 }
-
+.shop-shorter .nice-select .list {
+  max-height: 200px;
+  overflow: auto;
+}
 .shop-shorter .sort-text {
   font-weight: 500;
   color: var(--heading-color);

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Renderer2} from '@angular/core';
 import {NavigationEnd, Router, RouterOutlet} from '@angular/router';
 import {filter} from 'rxjs/operators';
 import {NgClass} from '@angular/common';
@@ -17,11 +17,12 @@ export class MainLayoutComponent implements OnInit {
   headerUpperClass = 'header-upper py-30 rpy-0'
 
   constructor(
-    private router: Router) {
+    private router: Router, private renderer: Renderer2) {
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe(event => {
         const url = event.urlAfterRedirects;
+        // this.hidePreloader();
         if (url.startsWith('/TourList') || url.startsWith('/AboutUs') || url.startsWith('/404') || url.startsWith('/TourDetails')) {
           this.headerClass = 'main-header header-one';
           this.headerUpperClass = 'header-upper bg-white py-30 rpy-0'
@@ -43,6 +44,18 @@ export class MainLayoutComponent implements OnInit {
     this.router.navigate(['/AboutUs']).then(r => {
     });
   }
+  // private hidePreloader(): void {
+  //   const preloader = document.querySelector('.preloader');
+  //   if (preloader) {
+  //     setTimeout(() => {
+  //       this.renderer.setStyle(preloader, 'transition', 'opacity 0.5s');
+  //       this.renderer.setStyle(preloader, 'opacity', '0');
+  //       setTimeout(() => {
+  //         this.renderer.setStyle(preloader, 'display', 'none');
+  //       }, 500); // مدت زمان fadeOut
+  //     }, 200); // delay قبل از fadeOut
+  //   }
+  // }
 
 
 }

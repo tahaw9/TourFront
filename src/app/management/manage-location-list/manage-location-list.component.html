@@ -1,3 +1,197 @@
-<p>
-  manage-location-list works!
-</p>
+<div class="locations-management-container">
+  <!-- هدر صفحه -->
+  <div class="header-section">
+    <h1 class="page-title">
+      <i class="bi bi-geo-alt-fill"></i>
+      مدیریت مقاصد تور
+    </h1>
+    <div class="action-buttons">
+      <button class="btn btn-outline">
+        <i class="bi bi-filter"></i>
+        فیلترها
+      </button>
+      <button class="btn btn-primary">
+        <i class="bi bi-plus-circle"></i>
+        افزودن مقصد جدید
+      </button>
+    </div>
+  </div>
+
+  <!-- بخش فیلترها -->
+  <div class="filter-section">
+    <div class="filter-group">
+      <label class="filter-label">جستجو</label>
+      <input type="text" class="filter-input" placeholder="نام مقصد...">
+    </div>
+    <div class="shop-shorter filter-group">
+      <label class="filter-label">سطح مکان</label>
+      <select class="select-nice filter-select LocationLevel-cmb">
+        <option value="" selected="">همه سطوح</option>
+        @for (locationLevel of LocationLevelCombo; track locationLevel.Guid) {
+          <option (click)="locationLevelFilterChange(locationLevel.Guid)" [value]="locationLevel.Guid">{{locationLevel.Name}}</option>
+        }
+      </select>
+    </div>
+    <div class="shop-shorter filter-group">
+      <label class="filter-label">والد</label>
+      <select class="select-nice filter-select">
+        <option value="">همه والدها</option>
+        <option value="iran">ایران</option>
+        <option value="tehran">تهران</option>
+        <option value="mazandaran">مازندران</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <button class="btn btn-primary" style="height: 45px;">
+        اعمال فیلترها
+      </button>
+    </div>
+  </div>
+
+  <!-- کارت‌های آمار -->
+  <div class="stats-cards">
+    <div class="stat-card">
+      <div class="stat-icon icon-primary">
+        <i class="bi bi-globe"></i>
+      </div>
+      <div class="stat-info">
+        <h3>۱۵</h3>
+        <p>کشور</p>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon icon-success">
+        <i class="bi bi-geo"></i>
+      </div>
+      <div class="stat-info">
+        <h3>۳۱</h3>
+        <p>استان</p>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon icon-warning">
+        <i class="bi bi-buildings"></i>
+      </div>
+      <div class="stat-info">
+        <h3>۱۲۴</h3>
+        <p>شهر</p>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon icon-info">
+        <i class="bi bi-pin-map"></i>
+      </div>
+      <div class="stat-info">
+        <h3>۳۵۶</h3>
+        <p>منطقه</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- جدول مقاصد -->
+  <div class="locations-table-container">
+    <div class="table-header">
+      <h3 class="table-title">لیست مقاصد</h3>
+      <div class="search-box">
+        <input type="text" class="search-input" placeholder="جستجوی مقصد...">
+        <i class="bi bi-search search-icon"></i>
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <table class="locations-table">
+        <thead>
+        <tr>
+          <th>نام مقصد</th>
+          <th>سطح مکان</th>
+          <th>والد</th>
+          <th>تعداد تورها</th>
+          <th>وضعیت</th>
+          <th>عملیات</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>ایران</td>
+          <td><span class="level-badge level-country">کشور</span></td>
+          <td>-</td>
+          <td>۱۵۰</td>
+          <td>فعال</td>
+          <td>
+            <div class="action-buttons">
+              <button class="action-btn btn-view"><i class="bi bi-eye"></i></button>
+              <button class="action-btn btn-edit"><i class="bi bi-pencil"></i></button>
+              <button class="action-btn btn-delete"><i class="bi bi-trash"></i></button>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>تهران</td>
+          <td><span class="level-badge level-province">استان</span></td>
+          <td>ایران</td>
+          <td>۴۵</td>
+          <td>فعال</td>
+          <td>
+            <div class="action-buttons">
+              <button class="action-btn btn-view"><i class="bi bi-eye"></i></button>
+              <button class="action-btn btn-edit"><i class="bi bi-pencil"></i></button>
+              <button class="action-btn btn-delete"><i class="bi bi-trash"></i></button>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>مازندران</td>
+          <td><span class="level-badge level-province">استان</span></td>
+          <td>ایران</td>
+          <td>۶۸</td>
+          <td>فعال</td>
+          <td>
+            <div class="action-buttons">
+              <button class="action-btn btn-view"><i class="bi bi-eye"></i></button>
+              <button class="action-btn btn-edit"><i class="bi bi-pencil"></i></button>
+              <button class="action-btn btn-delete"><i class="bi bi-trash"></i></button>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>شمال تهران</td>
+          <td><span class="level-badge level-city">شهر</span></td>
+          <td>تهران</td>
+          <td>۲۳</td>
+          <td>فعال</td>
+          <td>
+            <div class="action-buttons">
+              <button class="action-btn btn-view"><i class="bi bi-eye"></i></button>
+              <button class="action-btn btn-edit"><i class="bi bi-pencil"></i></button>
+              <button class="action-btn btn-delete"><i class="bi bi-trash"></i></button>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>درکه</td>
+          <td><span class="level-badge level-area">منطقه</span></td>
+          <td>شمال تهران</td>
+          <td>۱۲</td>
+          <td>فعال</td>
+          <td>
+            <div class="action-buttons">
+              <button class="action-btn btn-view"><i class="bi bi-eye"></i></button>
+              <button class="action-btn btn-edit"><i class="bi bi-pencil"></i></button>
+              <button class="action-btn btn-delete"><i class="bi bi-trash"></i></button>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- صفحه‌بندی -->
+    <div class="pagination">
+      <button class="page-btn"><i class="bi bi-chevron-right"></i></button>
+      <button class="page-btn active">1</button>
+      <button class="page-btn">2</button>
+      <button class="page-btn">3</button>
+      <button class="page-btn"><i class="bi bi-chevron-left"></i></button>
+    </div>
+  </div>
+</div>
