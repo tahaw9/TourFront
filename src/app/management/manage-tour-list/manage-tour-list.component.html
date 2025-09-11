@@ -135,17 +135,12 @@
     </div>
 
     <!-- صفحه‌بندی -->
-    <div class="pagination">
-      <button class="page-btn"><i class="bi bi-chevron-right"></i></button>
-      @for (a of Array.from({ length: (30 / 10) }); track $index) {
-        <button
-          (click)="ChangePageNumberAndReBind($index + 1)"
-          [class.active]="BasePaginationFilter.PageNumber == $index + 1"
-          class="page-btn">
-          {{$index + 1}}
-        </button>
-      }
-      <button class="page-btn"><i class="bi bi-chevron-left"></i></button>
-    </div>
+    <app-management-paging
+      [pageNumber]="BasePaginationFilter.PageNumber"
+      [pageSize]="BasePaginationFilter.PageSize"
+      [totalCount]="TourListBaseResponse?.DataCount || 0"
+      [maxPagesToShow]="2"
+      (pageChange)="onPageChange($event)">
+    </app-management-paging>
   </div>
 </div>

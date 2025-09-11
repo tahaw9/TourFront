@@ -12,6 +12,7 @@ import {BaseResponse} from '../../Models/BaseResponse';
 import {TourTypeService} from '../../services/TourTypeService';
 import {TourType} from '../../Models/TourType/TourType';
 import {AuthService} from '../../services/AuthService';
+import {ManagementPagingComponent} from '../management-paging/management-paging.component';
 
 @Component({
   selector: 'app-manage-tour-list',
@@ -19,7 +20,8 @@ import {AuthService} from '../../services/AuthService';
   imports: [
     FormsModule,
     DecimalPipe,
-    HttpClientModule
+    HttpClientModule,
+    ManagementPagingComponent
   ],
   styleUrls: ['./manage-tour-list.component.scss'],
   providers: [TourService, TourTypeService, AuthService]
@@ -82,6 +84,11 @@ export class ManageTourListComponent implements OnInit {
     this.router.navigate(['/admin/ManageTours/InsUp/2'], {
       state: { tour: tour }
     });
+  }
+
+  onPageChange(page: number) {
+    this.BasePaginationFilter.PageNumber = page;
+    this.BindTourListPagination();
   }
 
 

@@ -1,0 +1,24 @@
+<div class="pagination">
+<!--  <button class="page-btn" (click)="first()" [disabled]="pageNumber === 1" aria-label="first">«</button>-->
+  <button class="page-btn" (click)="prev()" [disabled]="pageNumber === 1" aria-label="prev">
+    <i class="bi bi-chevron-right"></i>
+  </button>
+
+  @for (p of pages; track p) {
+    @if (p !== '...') {
+      <button
+        class="page-btn"
+        [class.active]="p === pageNumber"
+        (click)="goTo($any(p))">
+        {{ p }}
+      </button>
+    } @else {
+      <span class="page-ellipsis">…</span>
+    }
+  }
+
+  <button class="page-btn" (click)="next()" [disabled]="pageNumber === totalPages" aria-label="next">
+    <i class="bi bi-chevron-left"></i>
+  </button>
+<!--  <button class="page-btn" (click)="last()" [disabled]="pageNumber === totalPages" aria-label="last">»</button>-->
+</div>

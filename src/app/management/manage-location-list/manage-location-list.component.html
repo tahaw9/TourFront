@@ -21,28 +21,29 @@
   <div class="filter-section">
     <div class="filter-group">
       <label class="filter-label">جستجو</label>
-      <input type="text" class="filter-input" placeholder="نام مقصد...">
+      <input type="text" [(ngModel)]="LocationNameFilter" class="filter-input" placeholder="نام مقصد...">
     </div>
     <div class="shop-shorter filter-group">
-      <label class="filter-label">سطح مکان</label>
       <select class="select-nice filter-select LocationLevel-cmb">
         <option value="" selected="">همه سطوح</option>
         @for (locationLevel of LocationLevelCombo; track locationLevel.Guid) {
-          <option (click)="locationLevelFilterChange(locationLevel.Guid)" [value]="locationLevel.Guid">{{locationLevel.Name}}</option>
+          <option
+            [value]="locationLevel.Guid">{{ locationLevel.Name }}
+          </option>
         }
       </select>
     </div>
-    <div class="shop-shorter filter-group">
-      <label class="filter-label">والد</label>
-      <select class="select-nice filter-select">
-        <option value="">همه والدها</option>
-        <option value="iran">ایران</option>
-        <option value="tehran">تهران</option>
-        <option value="mazandaran">مازندران</option>
-      </select>
-    </div>
+    <!--    <div class="shop-shorter filter-group">-->
+    <!--      <label class="filter-label">والد</label>-->
+    <!--      <select class="select-nice filter-select">-->
+    <!--        <option value="">همه والدها</option>-->
+    <!--        <option value="iran">ایران</option>-->
+    <!--        <option value="tehran">تهران</option>-->
+    <!--        <option value="mazandaran">مازندران</option>-->
+    <!--      </select>-->
+    <!--    </div>-->
     <div class="filter-group">
-      <button class="btn btn-primary" style="height: 45px;">
+      <button (click)="SearchWithFilters()" class="btn btn-primary" style="height: 45px;">
         اعمال فیلترها
       </button>
     </div>
@@ -50,42 +51,49 @@
 
   <!-- کارت‌های آمار -->
   <div class="stats-cards">
-    <div class="stat-card">
-      <div class="stat-icon icon-primary">
-        <i class="bi bi-globe"></i>
+    @for (categorizedCount of CategorizedCountList; track $index) {
+      <div class="stat-card">
+        <div class="stat-icon" [class.icon-primary]="categorizedCount.LocationLevelCode == 1000 || categorizedCount.LocationLevelCode == 1001"
+             [class.icon-success]="categorizedCount.LocationLevelCode == 1002 || categorizedCount.LocationLevelCode == 1003"
+             [class.icon-warning]="categorizedCount.LocationLevelCode == 1006">
+          <i class="bi" [class.bi-globe]="categorizedCount.LocationLevelCode == 1000 || categorizedCount.LocationLevelCode == 1001"
+             [class.bi-geo]="categorizedCount.LocationLevelCode == 1002"
+             [class.bi-buildings]="categorizedCount.LocationLevelCode == 1006 || categorizedCount.LocationLevelCode == 1003"
+             [class.bi-pin-map]="categorizedCount.LocationLevelCode != null && categorizedCount.LocationLevelCode >= 1004"></i>
+        </div>
+        <div class="stat-info">
+          <h3>{{categorizedCount.Count | persianNumber}}</h3>
+          <p>{{categorizedCount.LocationLevelName}}</p>
+        </div>
       </div>
-      <div class="stat-info">
-        <h3>۱۵</h3>
-        <p>کشور</p>
-      </div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-icon icon-success">
-        <i class="bi bi-geo"></i>
-      </div>
-      <div class="stat-info">
-        <h3>۳۱</h3>
-        <p>استان</p>
-      </div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-icon icon-warning">
-        <i class="bi bi-buildings"></i>
-      </div>
-      <div class="stat-info">
-        <h3>۱۲۴</h3>
-        <p>شهر</p>
-      </div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-icon icon-info">
-        <i class="bi bi-pin-map"></i>
-      </div>
-      <div class="stat-info">
-        <h3>۳۵۶</h3>
-        <p>منطقه</p>
-      </div>
-    </div>
+    }
+<!--    <div class="stat-card">-->
+<!--      <div class="stat-icon icon-success">-->
+<!--        <i class="bi bi-geo"></i>-->
+<!--      </div>-->
+<!--      <div class="stat-info">-->
+<!--        <h3>۳۱</h3>-->
+<!--        <p>استان</p>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="stat-card">-->
+<!--      <div class="stat-icon icon-warning">-->
+<!--        <i class="bi bi-buildings"></i>-->
+<!--      </div>-->
+<!--      <div class="stat-info">-->
+<!--        <h3>۱۲۴</h3>-->
+<!--        <p>شهر</p>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="stat-card">-->
+<!--      <div class="stat-icon icon-info">-->
+<!--        <i class="bi bi-pin-map"></i>-->
+<!--      </div>-->
+<!--      <div class="stat-info">-->
+<!--        <h3>۳۵۶</h3>-->
+<!--        <p>منطقه</p>-->
+<!--      </div>-->
+<!--    </div>-->
   </div>
 
   <!-- جدول مقاصد -->
@@ -99,9 +107,10 @@
     </div>
 
     <div class="table-responsive">
-      <table class="locations-table">
+      <table class="management-table">
         <thead>
         <tr>
+          <th>ردیف</th>
           <th>نام مقصد</th>
           <th>سطح مکان</th>
           <th>والد</th>
@@ -111,87 +120,54 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <td>ایران</td>
-          <td><span class="level-badge level-country">کشور</span></td>
-          <td>-</td>
-          <td>۱۵۰</td>
-          <td>فعال</td>
-          <td>
-            <div class="action-buttons">
-              <button class="action-btn btn-view"><i class="bi bi-eye"></i></button>
-              <button class="action-btn btn-edit"><i class="bi bi-pencil"></i></button>
-              <button class="action-btn btn-delete"><i class="bi bi-trash"></i></button>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>تهران</td>
-          <td><span class="level-badge level-province">استان</span></td>
-          <td>ایران</td>
-          <td>۴۵</td>
-          <td>فعال</td>
-          <td>
-            <div class="action-buttons">
-              <button class="action-btn btn-view"><i class="bi bi-eye"></i></button>
-              <button class="action-btn btn-edit"><i class="bi bi-pencil"></i></button>
-              <button class="action-btn btn-delete"><i class="bi bi-trash"></i></button>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>مازندران</td>
-          <td><span class="level-badge level-province">استان</span></td>
-          <td>ایران</td>
-          <td>۶۸</td>
-          <td>فعال</td>
-          <td>
-            <div class="action-buttons">
-              <button class="action-btn btn-view"><i class="bi bi-eye"></i></button>
-              <button class="action-btn btn-edit"><i class="bi bi-pencil"></i></button>
-              <button class="action-btn btn-delete"><i class="bi bi-trash"></i></button>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>شمال تهران</td>
-          <td><span class="level-badge level-city">شهر</span></td>
-          <td>تهران</td>
-          <td>۲۳</td>
-          <td>فعال</td>
-          <td>
-            <div class="action-buttons">
-              <button class="action-btn btn-view"><i class="bi bi-eye"></i></button>
-              <button class="action-btn btn-edit"><i class="bi bi-pencil"></i></button>
-              <button class="action-btn btn-delete"><i class="bi bi-trash"></i></button>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>درکه</td>
-          <td><span class="level-badge level-area">منطقه</span></td>
-          <td>شمال تهران</td>
-          <td>۱۲</td>
-          <td>فعال</td>
-          <td>
-            <div class="action-buttons">
-              <button class="action-btn btn-view"><i class="bi bi-eye"></i></button>
-              <button class="action-btn btn-edit"><i class="bi bi-pencil"></i></button>
-              <button class="action-btn btn-delete"><i class="bi bi-trash"></i></button>
-            </div>
-          </td>
-        </tr>
+          @for (location of LocationList; track $index) {
+            <tr>
+              <td>{{ ((BasePaginationFilter.PageSize * (BasePaginationFilter.PageNumber - 1)) + $index + 1) | persianNumber }}</td>
+              <td>{{ location.Name }}</td>
+              <td><span class="level-badge level-country">{{ location.LocationLevelName }}</span></td>
+              <td>{{ location.PName || '-' }}</td>
+              <td>-</td>
+              <td>فعال</td>
+              <td>
+                <div class="action-buttons">
+                  <button class="action-btn btn-view"><i class="bi bi-eye"></i></button>
+                  <button class="action-btn btn-edit"><i class="bi bi-pencil"></i></button>
+                  <button class="action-btn btn-delete"><i class="bi bi-trash"></i></button>
+                </div>
+              </td>
+            </tr>
+          }
+
         </tbody>
       </table>
     </div>
 
     <!-- صفحه‌بندی -->
-    <div class="pagination">
-      <button class="page-btn"><i class="bi bi-chevron-right"></i></button>
-      <button class="page-btn active">1</button>
-      <button class="page-btn">2</button>
-      <button class="page-btn">3</button>
-      <button class="page-btn"><i class="bi bi-chevron-left"></i></button>
-    </div>
+
+    <app-management-paging
+      [pageNumber]="BasePaginationFilter.PageNumber"
+      [pageSize]="BasePaginationFilter.PageSize"
+      [totalCount]="LocationListBaseResponse?.DataCount || 0"
+      [maxPagesToShow]="2"
+      (pageChange)="onPageChange($event)">
+    </app-management-paging>
+<!--    <div class="pagination">-->
+<!--      <button class="page-btn"><i class="bi bi-chevron-right"></i></button>-->
+<!--      @for (a of Array.from({length: (30 / 10)}); track $index) {-->
+<!--        <button-->
+<!--          (click)="ChangePageNumberAndReBind($index + 1)"-->
+<!--          [class.active]="BasePaginationFilter.PageNumber == $index + 1"-->
+<!--          class="page-btn">-->
+<!--          {{ $index + 1 }}-->
+<!--        </button>-->
+<!--      }-->
+<!--      <span>...</span>-->
+<!--      <button-->
+<!--        [class.active]="BasePaginationFilter.PageNumber == Math.ceil(LocationListBaseResponse.DataCount / BasePaginationFilter.PageSize)"-->
+<!--        (click)="ChangePageNumberAndReBind(Math.ceil(LocationListBaseResponse.DataCount / BasePaginationFilter.PageSize))"-->
+<!--        class="page-btn">{{ Math.ceil(LocationListBaseResponse.DataCount / BasePaginationFilter.PageSize) }}-->
+<!--      </button>-->
+<!--      <button class="page-btn"><i class="bi bi-chevron-left"></i></button>-->
+<!--    </div>-->
   </div>
 </div>

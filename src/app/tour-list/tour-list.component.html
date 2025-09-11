@@ -1,11 +1,11 @@
 <section class="page-banner-area pt-50 pb-35 rel z-1 bgs-cover"
-  style="background-image: url(../../assets/images/banner/banner.jpg);">
+         style="background-image: url(../../assets/images/banner/banner.jpg);">
   <div class="container">
     <div class="banner-inner text-white mb-50">
       <h2 class="page-title mb-10" data-aos="fade-right" data-aos-duration="1500" data-aos-offset="50">تورها سبک 2</h2>
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb justify-content-center mb-20" data-aos="fade-left" data-aos-delay="200"
-          data-aos-duration="1500" data-aos-offset="50">
+            data-aos-duration="1500" data-aos-offset="50">
           <li class="breadcrumb-item"><a href="index.html">صفحه اصلی</a></li>
           <li class="breadcrumb-item active">تورها سبک 2</li>
         </ol>
@@ -52,52 +52,53 @@
       <select class="select-nice search-order-select">
         <option [value]="null" selected>مرتب سازی بر اساس</option>
         @for (tourOrderFilter of getEnumEntriestourOrder(); track $index) {
-        <option [value]="tourOrderFilter.value">{{tourOrderFilter.key}}</option>
+          <option [value]="tourOrderFilter.value">{{ tourOrderFilter.key }}</option>
         }
       </select>
     </div>
     <hr class="mb-50">
     <div class="row">
       @for (item of TourList; track $index) {
-      <div class="col-xl-4 col-md-6">
-        <div class="destination-item tour-grid style-three bgc-lighter" data-aos="fade-up" data-aos-duration="1500"
-          data-aos-offset="50">
-          <div class="image">
-            <span class="badge bgc-pink">برجسته</span>
-            <a href="#" class="heart"><i class="fas fa-heart"></i></a>
-            <img [src]="'../../assets/images/destinations/tour-list1.jpg'" alt="Tour List">
-          </div>
-          <div class="content">
-            <div class="destination-header">
-              <span class="location"><i class="fal fa-map-marker-alt"></i>{{item.DestinationName}}</span>
-              <div class="ratting">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-              </div>
+        <div class="col-xl-4 col-md-6">
+          <div class="destination-item tour-grid style-three bgc-lighter" data-aos="fade-up" data-aos-duration="1500"
+               data-aos-offset="50">
+            <div class="image">
+              <span class="badge bgc-pink">برجسته</span>
+              <a href="#" class="heart"><i class="fas fa-heart"></i></a>
+              <img [src]="'../../assets/images/destinations/tour-list1.jpg'" alt="Tour List">
             </div>
-            <h5><a (click)="goToDetails()">{{item.Title}}</a></h5>
-            <p>{{item.Description}}</p>
-            <ul class="blog-meta">
-              <li><i class="far fa-clock"></i>{{item.DurationNight + ' شب و ' + (item.DurationNight +1) + ' روز'}}</li>
-              <li><i class="far fa-user"></i> 5-8 مهمان</li>
-            </ul>
-            <div class="destination-footer">
-              <span class="price"><span>{{item.Price}} تومان</span> / هر نفر</span>
-              <a (click)="goToDetails()" class="theme-btn style-two style-three">
-                <span data-hover="رزرو تور">رزرو تور</span>
-                <i class="fal fa-arrow-right"></i>
-              </a>
+            <div class="content">
+              <div class="destination-header">
+                <span class="location"><i class="fal fa-map-marker-alt"></i>{{ item.DestinationName }}</span>
+                <div class="ratting">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+              </div>
+              <h5><a (click)="goToDetails()">{{ item.Title }}</a></h5>
+              <p>{{ item.Description }}</p>
+              <ul class="blog-meta">
+                <li><i class="far fa-clock"></i>{{ item.DurationNight + ' شب و ' + (item.DurationNight + 1) + ' روز' }}
+                </li>
+                <li><i class="far fa-user"></i> 5-8 مهمان</li>
+              </ul>
+              <div class="destination-footer">
+                <span class="price"><span>{{ item.Price }} تومان</span> / هر نفر</span>
+                <a (click)="goToDetails()" class="theme-btn style-two style-three">
+                  <span data-hover="رزرو تور">رزرو تور</span>
+                  <i class="fal fa-arrow-right"></i>
+                </a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
       }
       <div class="col-lg-12">
         <ul class="pagination justify-content-center pt-15 flex-wrap" data-aos="fade-up" data-aos-duration="1500"
-          data-aos-offset="50">
+            data-aos-offset="50">
           <li class="page-item disabled">
             <span class="page-link"><i class="far fa-chevron-right"></i></span>
           </li>
@@ -459,12 +460,12 @@
 
 <!-- Newsletter Area start -->
 <section class="newsletter-three bgc-primary py-100 rel z-1"
-  style="background-image: url(../../assets/images/newsletter/newsletter-bg-lines.png);">
+         style="background-image: url(../../assets/images/newsletter/newsletter-bg-lines.png);">
   <div class="container container-1500">
     <div class="row">
       <div class="col-lg-6">
         <div class="newsletter-content-part text-white rmb-55" data-aos="zoom-in-left" data-aos-duration="1500"
-          data-aos-offset="50">
+             data-aos-offset="50">
           <div class="section-title counter-text-wrap mb-45">
             <h2>برای دریافت پیشنهادات و نکات بیشتر در خبرنامه </h2>
             <p>یک سایت <span class="count-text plus" data-speed="3000" data-stop="34500">0</span> محبوب ترین تجربه ای که
@@ -480,14 +481,15 @@
           <p>بدون نیاز به کارت اعتباری بدون تعهد</p>
         </div>
         <div class="newsletter-bg-image" data-aos="zoom-in-up" data-aos-delay="100" data-aos-duration="1500"
-          data-aos-offset="50">
+             data-aos-offset="50">
           <img src="../../assets/images/newsletter/newsletter-bg-image.png" alt="Newsletter">
         </div>
       </div>
       <div class="col-lg-6">
         <div class="newsletter-image-part bgs-cover"
-          style="background-image: url(../../assets/images/newsletter/newsletter-two-right.jpg);" data-aos="fade-right"
-          data-aos-duration="1500" data-aos-offset="50"></div>
+             style="background-image: url(../../assets/images/newsletter/newsletter-two-right.jpg);"
+             data-aos="fade-right"
+             data-aos-duration="1500" data-aos-offset="50"></div>
       </div>
     </div>
   </div>

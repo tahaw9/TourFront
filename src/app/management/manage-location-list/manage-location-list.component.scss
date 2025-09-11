@@ -1,3 +1,5 @@
+
+@import '../style.scss';
 :root {
   --primary-color: #3b82f6;
   --primary-hover: #2563eb;
@@ -256,143 +258,143 @@ body {
   color: var(--light-text);
 }
 
-.table-responsive {
-  overflow-x: auto;
-}
-
-.locations-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.locations-table th {
-  background: #f8fafc;
-  padding: 16px;
-  text-align: right;
-  font-weight: 600;
-  color: var(--dark-text);
-  border-bottom: 2px solid var(--border-color);
-}
-
-.locations-table td {
-  padding: 16px;
-  border-bottom: 1px solid var(--border-color);
-  vertical-align: middle;
-}
-
-.locations-table tr:last-child td {
-  border-bottom: none;
-}
-
-.locations-table tr:hover {
-  background: #f1f5f9;
-}
-
-.level-badge {
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 500;
-}
-
-.level-country {
-  background: rgba(59, 130, 246, 0.1);
-  color: var(--primary-color);
-}
-
-.level-province {
-  background: rgba(16, 185, 129, 0.1);
-  color: var(--success-color);
-}
-
-.level-city {
-  background: rgba(245, 158, 11, 0.1);
-  color: var(--warning-color);
-}
-
-.level-area {
-  background: rgba(6, 182, 212, 0.1);
-  color: var(--info-color);
-}
-
-.action-buttons {
-  display: flex;
-  gap: 8px;
-}
-
-.action-btn {
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.btn-view {
-  background: rgba(59, 130, 246, 0.1);
-  color: var(--primary-color);
-}
-
-.btn-view:hover {
-  background: var(--primary-color);
-  color: white;
-}
-
-.btn-edit {
-  background: rgba(16, 185, 129, 0.1);
-  color: var(--success-color);
-}
-
-.btn-edit:hover {
-  background: var(--success-color);
-  color: white;
-}
-
-.btn-delete {
-  background: rgba(239, 68, 68, 0.1);
-  color: var(--danger-color);
-}
-
-.btn-delete:hover {
-  background: var(--danger-color);
-  color: white;
-}
-
-.pagination {
-  display: flex;
-  justify-content: center;
-  padding: 20px;
-  gap: 8px;
-}
-
-.page-btn {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--border-color);
-  background: white;
-  color: var(--dark-text);
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.page-btn:hover {
-  border-color: var(--primary-color);
-  color: var(--primary-color);
-}
-
-.page-btn.active {
-  background: var(--primary-color);
-  color: white;
-  border-color: var(--primary-color);
-}
+//.table-responsive {
+//  overflow-x: auto;
+//}
+//
+//.locations-table {
+//  width: 100%;
+//  border-collapse: collapse;
+//}
+//
+//.locations-table th {
+//  background: #f8fafc;
+//  padding: 16px;
+//  text-align: right;
+//  font-weight: 600;
+//  color: var(--dark-text);
+//  border-bottom: 2px solid var(--border-color);
+//}
+//
+//.locations-table td {
+//  padding: 16px;
+//  border-bottom: 1px solid var(--border-color);
+//  vertical-align: middle;
+//}
+//
+//.locations-table tr:last-child td {
+//  border-bottom: none;
+//}
+//
+//.locations-table tr:hover {
+//  background: #f1f5f9;
+//}
+//
+//.level-badge {
+//  padding: 6px 12px;
+//  border-radius: 20px;
+//  font-size: 12px;
+//  font-weight: 500;
+//}
+//
+//.level-country {
+//  background: rgba(59, 130, 246, 0.1);
+//  color: var(--primary-color);
+//}
+//
+//.level-province {
+//  background: rgba(16, 185, 129, 0.1);
+//  color: var(--success-color);
+//}
+//
+//.level-city {
+//  background: rgba(245, 158, 11, 0.1);
+//  color: var(--warning-color);
+//}
+//
+//.level-area {
+//  background: rgba(6, 182, 212, 0.1);
+//  color: var(--info-color);
+//}
+//
+//.action-buttons {
+//  display: flex;
+//  gap: 8px;
+//}
+//
+//.action-btn {
+//  width: 36px;
+//  height: 36px;
+//  border-radius: 8px;
+//  display: flex;
+//  align-items: center;
+//  justify-content: center;
+//  border: none;
+//  cursor: pointer;
+//  transition: all 0.2s ease;
+//}
+//
+//.btn-view {
+//  background: rgba(59, 130, 246, 0.1);
+//  color: var(--primary-color);
+//}
+//
+//.btn-view:hover {
+//  background: var(--primary-color);
+//  color: white;
+//}
+//
+//.btn-edit {
+//  background: rgba(16, 185, 129, 0.1);
+//  color: var(--success-color);
+//}
+//
+//.btn-edit:hover {
+//  background: var(--success-color);
+//  color: white;
+//}
+//
+//.btn-delete {
+//  background: rgba(239, 68, 68, 0.1);
+//  color: var(--danger-color);
+//}
+//
+//.btn-delete:hover {
+//  background: var(--danger-color);
+//  color: white;
+//}
+//
+//.pagination {
+//  display: flex;
+//  justify-content: center;
+//  padding: 20px;
+//  gap: 8px;
+//}
+//
+//.page-btn {
+//  width: 40px;
+//  height: 40px;
+//  border-radius: 10px;
+//  display: flex;
+//  align-items: center;
+//  justify-content: center;
+//  border: 1px solid var(--border-color);
+//  background: white;
+//  color: var(--dark-text);
+//  cursor: pointer;
+//  transition: all 0.2s ease;
+//}
+//
+//.page-btn:hover {
+//  border-color: var(--primary-color);
+//  color: var(--primary-color);
+//}
+//
+//.page-btn.active {
+//  background: var(--primary-color);
+//  color: white;
+//  border-color: var(--primary-color);
+//}
 
 /* مودال افزودن/ویرایش */
 .modal-overlay {

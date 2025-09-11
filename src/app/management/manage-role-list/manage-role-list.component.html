@@ -1,0 +1,172 @@
+<div class="locations-management-container">
+  <!-- هدر صفحه -->
+  <div class="header-section">
+    <h1 class="page-title">
+      <i class="bi bi-geo-alt-fill"></i>
+      مدیریت نقش ها
+    </h1>
+    <div class="action-buttons">
+      <button class="btn btn-outline">
+        <i class="bi bi-filter"></i>
+        فیلترها
+      </button>
+      <button class="btn btn-primary">
+        <i class="bi bi-plus-circle"></i>
+        افزودن نقش جدید
+      </button>
+    </div>
+  </div>
+
+  <!-- بخش فیلترها -->
+<!--  <div class="filter-section">-->
+<!--    <div class="filter-group">-->
+<!--      <label class="filter-label">جستجو</label>-->
+<!--      <input type="text" [(ngModel)]="LocationNameFilter" class="filter-input" placeholder="نام مقصد...">-->
+<!--    </div>-->
+<!--    <div class="shop-shorter filter-group">-->
+<!--      <select class="select-nice filter-select LocationLevel-cmb">-->
+<!--        <option value="" selected="">همه سطوح</option>-->
+<!--        @for (locationLevel of LocationLevelCombo; track locationLevel.Guid) {-->
+<!--          <option-->
+<!--            [value]="locationLevel.Guid">{{ locationLevel.Name }}-->
+<!--          </option>-->
+<!--        }-->
+<!--      </select>-->
+<!--    </div>-->
+<!--    &lt;!&ndash;    <div class="shop-shorter filter-group">&ndash;&gt;-->
+<!--    &lt;!&ndash;      <label class="filter-label">والد</label>&ndash;&gt;-->
+<!--    &lt;!&ndash;      <select class="select-nice filter-select">&ndash;&gt;-->
+<!--    &lt;!&ndash;        <option value="">همه والدها</option>&ndash;&gt;-->
+<!--    &lt;!&ndash;        <option value="iran">ایران</option>&ndash;&gt;-->
+<!--    &lt;!&ndash;        <option value="tehran">تهران</option>&ndash;&gt;-->
+<!--    &lt;!&ndash;        <option value="mazandaran">مازندران</option>&ndash;&gt;-->
+<!--    &lt;!&ndash;      </select>&ndash;&gt;-->
+<!--    &lt;!&ndash;    </div>&ndash;&gt;-->
+<!--    <div class="filter-group">-->
+<!--      <button (click)="SearchWithFilters()" class="btn btn-primary" style="height: 45px;">-->
+<!--        اعمال فیلترها-->
+<!--      </button>-->
+<!--    </div>-->
+<!--  </div>-->
+
+  <!-- کارت‌های آمار -->
+<!--  <div class="stats-cards">-->
+<!--    @for (categorizedCount of CategorizedCountList; track $index) {-->
+<!--      <div class="stat-card">-->
+<!--        <div class="stat-icon" [class.icon-primary]="categorizedCount.LocationLevelCode == 1000 || categorizedCount.LocationLevelCode == 1001"-->
+<!--             [class.icon-success]="categorizedCount.LocationLevelCode == 1002 || categorizedCount.LocationLevelCode == 1003"-->
+<!--             [class.icon-warning]="categorizedCount.LocationLevelCode == 1006">-->
+<!--          <i class="bi" [class.bi-globe]="categorizedCount.LocationLevelCode == 1000 || categorizedCount.LocationLevelCode == 1001"-->
+<!--             [class.bi-geo]="categorizedCount.LocationLevelCode == 1002"-->
+<!--             [class.bi-buildings]="categorizedCount.LocationLevelCode == 1006 || categorizedCount.LocationLevelCode == 1003"-->
+<!--             [class.bi-pin-map]="categorizedCount.LocationLevelCode != null && categorizedCount.LocationLevelCode >= 1004"></i>-->
+<!--        </div>-->
+<!--        <div class="stat-info">-->
+<!--          <h3>{{categorizedCount.Count | persianNumber}}</h3>-->
+<!--          <p>{{categorizedCount.LocationLevelName}}</p>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    }-->
+<!--    &lt;!&ndash;    <div class="stat-card">&ndash;&gt;-->
+<!--    &lt;!&ndash;      <div class="stat-icon icon-success">&ndash;&gt;-->
+<!--    &lt;!&ndash;        <i class="bi bi-geo"></i>&ndash;&gt;-->
+<!--    &lt;!&ndash;      </div>&ndash;&gt;-->
+<!--    &lt;!&ndash;      <div class="stat-info">&ndash;&gt;-->
+<!--    &lt;!&ndash;        <h3>۳۱</h3>&ndash;&gt;-->
+<!--    &lt;!&ndash;        <p>استان</p>&ndash;&gt;-->
+<!--    &lt;!&ndash;      </div>&ndash;&gt;-->
+<!--    &lt;!&ndash;    </div>&ndash;&gt;-->
+<!--    &lt;!&ndash;    <div class="stat-card">&ndash;&gt;-->
+<!--    &lt;!&ndash;      <div class="stat-icon icon-warning">&ndash;&gt;-->
+<!--    &lt;!&ndash;        <i class="bi bi-buildings"></i>&ndash;&gt;-->
+<!--    &lt;!&ndash;      </div>&ndash;&gt;-->
+<!--    &lt;!&ndash;      <div class="stat-info">&ndash;&gt;-->
+<!--    &lt;!&ndash;        <h3>۱۲۴</h3>&ndash;&gt;-->
+<!--    &lt;!&ndash;        <p>شهر</p>&ndash;&gt;-->
+<!--    &lt;!&ndash;      </div>&ndash;&gt;-->
+<!--    &lt;!&ndash;    </div>&ndash;&gt;-->
+<!--    &lt;!&ndash;    <div class="stat-card">&ndash;&gt;-->
+<!--    &lt;!&ndash;      <div class="stat-icon icon-info">&ndash;&gt;-->
+<!--    &lt;!&ndash;        <i class="bi bi-pin-map"></i>&ndash;&gt;-->
+<!--    &lt;!&ndash;      </div>&ndash;&gt;-->
+<!--    &lt;!&ndash;      <div class="stat-info">&ndash;&gt;-->
+<!--    &lt;!&ndash;        <h3>۳۵۶</h3>&ndash;&gt;-->
+<!--    &lt;!&ndash;        <p>منطقه</p>&ndash;&gt;-->
+<!--    &lt;!&ndash;      </div>&ndash;&gt;-->
+<!--    &lt;!&ndash;    </div>&ndash;&gt;-->
+<!--  </div>-->
+
+  <!-- جدول نقش ها -->
+  <div class="locations-table-container">
+    <div class="table-header">
+      <h3 class="table-title">لیست نقش ها</h3>
+      <div class="search-box">
+        <input type="text" class="search-input" placeholder="جستجوی نقش...">
+        <i class="bi bi-search search-icon"></i>
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <table class="management-table">
+        <thead>
+        <tr>
+          <th>ردیف</th>
+          <th>نام نقش</th>
+          <th>کد</th>
+          <th>توضیحات</th>
+          <th>وضعیت</th>
+          <th>عملیات</th>
+        </tr>
+        </thead>
+        <tbody>
+<!--          @for (location of LocationList; track $index) {-->
+<!--            <tr>-->
+<!--              <td>{{ ((BasePaginationFilter.PageSize * (BasePaginationFilter.PageNumber - 1)) + $index + 1) | persianNumber }}</td>-->
+<!--              <td>{{ location.Name }}</td>-->
+<!--              <td><span class="level-badge level-country">{{ location.LocationLevelName }}</span></td>-->
+<!--              <td>{{ location.PName || '-' }}</td>-->
+<!--              <td>-</td>-->
+<!--              <td>فعال</td>-->
+<!--              <td>-->
+<!--                <div class="action-buttons">-->
+<!--                  <button class="action-btn btn-view"><i class="bi bi-eye"></i></button>-->
+<!--                  <button class="action-btn btn-edit"><i class="bi bi-pencil"></i></button>-->
+<!--                  <button class="action-btn btn-delete"><i class="bi bi-trash"></i></button>-->
+<!--                </div>-->
+<!--              </td>-->
+<!--            </tr>-->
+<!--          }-->
+
+        </tbody>
+      </table>
+    </div>
+
+    <!-- صفحه‌بندی -->
+
+    <app-management-paging
+      [pageNumber]="BasePaginationFilter.PageNumber"
+      [pageSize]="BasePaginationFilter.PageSize"
+      [totalCount]="RoleListBaseResponse?.DataCount || 0"
+      [maxPagesToShow]="2"
+      (pageChange)="onPageChange($event)">
+    </app-management-paging>
+    <!--    <div class="pagination">-->
+    <!--      <button class="page-btn"><i class="bi bi-chevron-right"></i></button>-->
+    <!--      @for (a of Array.from({length: (30 / 10)}); track $index) {-->
+    <!--        <button-->
+    <!--          (click)="ChangePageNumberAndReBind($index + 1)"-->
+    <!--          [class.active]="BasePaginationFilter.PageNumber == $index + 1"-->
+    <!--          class="page-btn">-->
+    <!--          {{ $index + 1 }}-->
+    <!--        </button>-->
+    <!--      }-->
+    <!--      <span>...</span>-->
+    <!--      <button-->
+    <!--        [class.active]="BasePaginationFilter.PageNumber == Math.ceil(LocationListBaseResponse.DataCount / BasePaginationFilter.PageSize)"-->
+    <!--        (click)="ChangePageNumberAndReBind(Math.ceil(LocationListBaseResponse.DataCount / BasePaginationFilter.PageSize))"-->
+    <!--        class="page-btn">{{ Math.ceil(LocationListBaseResponse.DataCount / BasePaginationFilter.PageSize) }}-->
+    <!--      </button>-->
+    <!--      <button class="page-btn"><i class="bi bi-chevron-left"></i></button>-->
+    <!--    </div>-->
+  </div>
+</div>

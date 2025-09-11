@@ -9,6 +9,7 @@ import {TourList} from '../Models/Tour/TourList';
 import {InsLocation} from '../Models/Location/InsLocation';
 import {LocationPaginationFilter} from '../Models/Location/LocationPaginationFilter';
 import {LocationList} from '../Models/Location/LocationList';
+import {LocationCategorizedCount} from '../Models/Location/LocationCategorizedCount';
 
 @Injectable({
   providedIn: 'root'
@@ -16,13 +17,18 @@ import {LocationList} from '../Models/Location/LocationList';
 export class LocationService {
   private baseUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
-  InsertLocation(data : InsLocation): Observable<BaseResponse<boolean>> {
+  InsertLocation(data: InsLocation): Observable<BaseResponse<boolean>> {
     return this.http.post<BaseResponse<boolean>>(this.baseUrl + "Location/Insert", data, {responseType: 'json'});
   }
 
-  GetWithPagination(PaginationFilter : BasePaginationFilter<LocationPaginationFilter>): Observable<BaseResponse<LocationList[]>> {
+  GetWithPagination(PaginationFilter: BasePaginationFilter<LocationPaginationFilter>): Observable<BaseResponse<LocationList[]>> {
     return this.http.get<BaseResponse<LocationList[]>>(this.baseUrl + "Location/GetWithPagination?request=" + JSON.stringify(PaginationFilter));
+  }
+
+  GetLocationCategorizedCount(): Observable<BaseResponse<LocationCategorizedCount[]>> {
+    return this.http.get<BaseResponse<LocationCategorizedCount[]>>(this.baseUrl + "Location/CategorizedCount");
   }
 }

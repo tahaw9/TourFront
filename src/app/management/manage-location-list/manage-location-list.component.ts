@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 import {LocationService} from '../../services/LocationService';
 import {TourType} from '../../Models/TourType/TourType';
@@ -10,13 +10,17 @@ import {PluginInitializer} from '../../services/plugin-initializer';
 import {LocationLevelService} from '../../services/LocationLevelService';
 import {LocationLevel} from '../../Models/LocationLevel/LocationLevel';
 import {FormsModule} from '@angular/forms';
+import {LocationCategorizedCount} from '../../Models/Location/LocationCategorizedCount';
+import {DecimalPipe} from '@angular/common';
+import {PersianNumberPipe} from '../../pipes/PersianNumberPipe';
+import {ManagementPagingComponent} from '../management-paging/management-paging.component';
 
 @Component({
   selector: 'app-manage-location-list',
   templateUrl: './manage-location-list.component.html',
   styleUrls: ['./manage-location-list.component.scss'],
-  imports: [HttpClientModule, FormsModule],
-  providers:[LocationService, LocationLevelService]
+  imports: [HttpClientModule, FormsModule, PersianNumberPipe, ManagementPagingComponent],
+  providers: [LocationService, LocationLevelService]
 })
 export class ManageLocationListComponent implements OnInit {
 
@@ -24,15 +28,19 @@ export class ManageLocationListComponent implements OnInit {
   LocationList: LocationList[] = [];
   LocationLevelCombo: LocationLevel[] = [];
   LocationListBaseResponse: BaseResponse<LocationList[]> = new BaseResponse<LocationList[]>();
-  LocationLevelGuidFilter: string = "";
+  CategorizedCountList: LocationCategorizedCount[] = [];
+  LocationNameFilter: string = "";
+
   constructor(private LocationService: LocationService,
-              private LocationLevelService: LocationLevelService, private PluginInitializer: PluginInitializer) { }
+              private LocationLevelService: LocationLevelService, private PluginInitializer: PluginInitializer) {
+  }
 
   ngOnInit() {
     this.BasePaginationFilter.PageSize = 10;
 
     this.BindLocationLevelFilter();
     this.BindLocationListPagination();
+    this.GetLocationCategorizedCount();
   }
 
   BindLocationListPagination() {
@@ -52,13 +60,33 @@ export class ManageLocationListComponent implements OnInit {
 
     })
   }
+  onPageChange(page: number) {
+    this.BasePaginationFilter.PageNumber = page;
+    this.BindLocationListPagination();
+  }
 
-  BindLocationLevelFilter(){
+
+  SearchWithFilters() {
+    debugger
+    this.BasePaginationFilter.Filters = new LocationPaginationFilter();
+    const LocationLevelFilter = document.querySelector('.LocationLevel-cmb li.selected');
+    if (LocationLevelFilter) {
+      const LocationLevelGuidFilter = LocationLevelFilter.getAttribute('data-value');
+      if (LocationLevelGuidFilter != "" && LocationLevelGuidFilter != null) {
+        this.BasePaginationFilter.Filters.LocationLevelGuid = LocationLevelGuidFilter;
+      }
+    }
+    if(this.LocationNameFilter != "" && this.LocationNameFilter != null) {
+      this.BasePaginationFilter.Filters.Name = this.LocationNameFilter;
+    }
+    this.BindLocationListPagination();
+  }
+
+  BindLocationLevelFilter() {
     this.LocationLevelService.GetAllForCombo().subscribe(response => {
       if (!response.succcess) {
         console.log(response.Message);
-      }
-      else{
+      } else {
         this.LocationLevelCombo = response.Data || [];
         (setTimeout(() => {
           ($('.LocationLevel-cmb')).niceSelect('update');
@@ -67,8 +95,21 @@ export class ManageLocationListComponent implements OnInit {
     })
   }
 
-  locationLevelFilterChange(Guid: string) {
-    this.LocationLevelGuidFilter = Guid;
+
+  ChangePageNumberAndReBind(pageNumber: number) {
+    this.BasePaginationFilter.PageNumber = pageNumber;
+    this.BindLocationListPagination();
   }
 
+
+  GetLocationCategorizedCount() {
+    this.LocationService.GetLocationCategorizedCount().subscribe(res => {
+      if (res.Data)
+        this.CategorizedCountList = res.Data;
+
+    })
+  }
+
+  protected readonly Array = Array;
+  protected readonly Math = Math;
 }
