@@ -34,7 +34,10 @@
               <div class="col-md-6 mb-3">
                 <label for="tourDate" class="form-label">تاریخ برگزاری</label>
                 <div class="datepicker-container">
-                  <input type="date" class="form-control" id="tourDate" required>
+                  <input type="text"
+                         #dp1="appDatepicker"
+                         [appDatepicker]="{ calendar: 'persian', locale: 'fa', rtl: true, theme:'dark' }"
+                         class="form-control">
                 </div>
               </div>
               <div class="col-md-6 mb-3">
@@ -134,7 +137,7 @@
               <button type="button" class="btn btn-outline-secondary me-2">
                 <i class="bi bi-x-circle"></i> انصراف
               </button>
-              <button type="submit" class="btn btn-primary">
+              <button (click)="readDate()" type="button" class="btn btn-primary">
                 <i class="bi bi-check-circle"></i> ذخیره تور
               </button>
             </div>

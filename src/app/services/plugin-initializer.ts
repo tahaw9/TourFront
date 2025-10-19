@@ -50,7 +50,7 @@ export class PluginInitializer {
       $this.slick({
         autoplay: true,
         dots: true
-        // تنظیمات دلخواه
+        // optional logics
       });
     });
   }
@@ -59,7 +59,7 @@ export class PluginInitializer {
   private initMagnificPopup() {
     $('.popup-link').magnificPopup({
       type: 'image'
-      // یا تنظیمات دیگه
+      // optional logics
     });
   }
 }

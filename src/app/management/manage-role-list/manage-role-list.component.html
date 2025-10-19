@@ -18,36 +18,30 @@
   </div>
 
   <!-- بخش فیلترها -->
-<!--  <div class="filter-section">-->
-<!--    <div class="filter-group">-->
-<!--      <label class="filter-label">جستجو</label>-->
-<!--      <input type="text" [(ngModel)]="LocationNameFilter" class="filter-input" placeholder="نام مقصد...">-->
-<!--    </div>-->
-<!--    <div class="shop-shorter filter-group">-->
-<!--      <select class="select-nice filter-select LocationLevel-cmb">-->
-<!--        <option value="" selected="">همه سطوح</option>-->
-<!--        @for (locationLevel of LocationLevelCombo; track locationLevel.Guid) {-->
-<!--          <option-->
-<!--            [value]="locationLevel.Guid">{{ locationLevel.Name }}-->
-<!--          </option>-->
-<!--        }-->
-<!--      </select>-->
-<!--    </div>-->
-<!--    &lt;!&ndash;    <div class="shop-shorter filter-group">&ndash;&gt;-->
-<!--    &lt;!&ndash;      <label class="filter-label">والد</label>&ndash;&gt;-->
-<!--    &lt;!&ndash;      <select class="select-nice filter-select">&ndash;&gt;-->
-<!--    &lt;!&ndash;        <option value="">همه والدها</option>&ndash;&gt;-->
-<!--    &lt;!&ndash;        <option value="iran">ایران</option>&ndash;&gt;-->
-<!--    &lt;!&ndash;        <option value="tehran">تهران</option>&ndash;&gt;-->
-<!--    &lt;!&ndash;        <option value="mazandaran">مازندران</option>&ndash;&gt;-->
-<!--    &lt;!&ndash;      </select>&ndash;&gt;-->
-<!--    &lt;!&ndash;    </div>&ndash;&gt;-->
-<!--    <div class="filter-group">-->
-<!--      <button (click)="SearchWithFilters()" class="btn btn-primary" style="height: 45px;">-->
-<!--        اعمال فیلترها-->
-<!--      </button>-->
-<!--    </div>-->
-<!--  </div>-->
+  <div class="filter-section">
+    <div class="filter-group">
+      <label class="filter-label">جستجو</label>
+      <input type="text" [(ngModel)]="RoleNameFilter" class="filter-input" placeholder="نام نقش...">
+    </div>
+    <div class="filter-group">
+      <label class="filter-label">جستجو براساس کد</label>
+      <input type="text" [(ngModel)]="RoleCodeFilter" class="filter-input" placeholder="کد...">
+    </div>
+    <!--    <div class="shop-shorter filter-group">-->
+    <!--      <label class="filter-label">والد</label>-->
+    <!--      <select class="select-nice filter-select">-->
+    <!--        <option value="">همه والدها</option>-->
+    <!--        <option value="iran">ایران</option>-->
+    <!--        <option value="tehran">تهران</option>-->
+    <!--        <option value="mazandaran">مازندران</option>-->
+    <!--      </select>-->
+    <!--    </div>-->
+    <div class="filter-group">
+      <button (click)="SearchWithFilters()" class="btn btn-primary" style="height: 45px;">
+        اعمال فیلترها
+      </button>
+    </div>
+  </div>
 
   <!-- کارت‌های آمار -->
 <!--  <div class="stats-cards">-->
@@ -119,23 +113,22 @@
         </tr>
         </thead>
         <tbody>
-<!--          @for (location of LocationList; track $index) {-->
-<!--            <tr>-->
-<!--              <td>{{ ((BasePaginationFilter.PageSize * (BasePaginationFilter.PageNumber - 1)) + $index + 1) | persianNumber }}</td>-->
-<!--              <td>{{ location.Name }}</td>-->
-<!--              <td><span class="level-badge level-country">{{ location.LocationLevelName }}</span></td>-->
-<!--              <td>{{ location.PName || '-' }}</td>-->
-<!--              <td>-</td>-->
-<!--              <td>فعال</td>-->
-<!--              <td>-->
-<!--                <div class="action-buttons">-->
-<!--                  <button class="action-btn btn-view"><i class="bi bi-eye"></i></button>-->
-<!--                  <button class="action-btn btn-edit"><i class="bi bi-pencil"></i></button>-->
-<!--                  <button class="action-btn btn-delete"><i class="bi bi-trash"></i></button>-->
-<!--                </div>-->
-<!--              </td>-->
-<!--            </tr>-->
-<!--          }-->
+          @for (role of roleList; track $index) {
+            <tr>
+              <td>{{ ((BasePaginationFilter.PageSize * (BasePaginationFilter.PageNumber - 1)) + $index + 1) | persianNumber }}</td>
+              <td>{{ role.Name }}</td>
+              <td>{{ role.RoleCode | persianNumber}}</td>
+              <td>{{ role.Description || '-' }}</td>
+              <td>فعال</td>
+              <td>
+                <div class="action-buttons">
+                  <button class="action-btn btn-view"><i class="bi bi-eye"></i></button>
+                  <button class="action-btn btn-edit"><i class="bi bi-pencil"></i></button>
+                  <button class="action-btn btn-delete"><i class="bi bi-trash"></i></button>
+                </div>
+              </td>
+            </tr>
+          }
 
         </tbody>
       </table>

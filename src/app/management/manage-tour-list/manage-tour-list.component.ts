@@ -13,6 +13,7 @@ import {TourTypeService} from '../../services/TourTypeService';
 import {TourType} from '../../Models/TourType/TourType';
 import {AuthService} from '../../services/AuthService';
 import {ManagementPagingComponent} from '../management-paging/management-paging.component';
+import {PersianNumberPipe} from '../../pipes/PersianNumberPipe';
 
 @Component({
   selector: 'app-manage-tour-list',
@@ -21,7 +22,8 @@ import {ManagementPagingComponent} from '../management-paging/management-paging.
     FormsModule,
     DecimalPipe,
     HttpClientModule,
-    ManagementPagingComponent
+    ManagementPagingComponent,
+    PersianNumberPipe
   ],
   styleUrls: ['./manage-tour-list.component.scss'],
   providers: [TourService, TourTypeService, AuthService]

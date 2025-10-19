@@ -7,10 +7,12 @@ import { TourList } from '../Models/Tour/TourList';
 import { HttpClientModule } from '@angular/common/http';
 import { PluginInitializer } from '../services/plugin-initializer';
 import {Router} from '@angular/router';
+import {ManagementPagingComponent} from '../management/management-paging/management-paging.component';
+import {BaseResponse} from '../Models/BaseResponse';
 
 @Component({
   selector: 'app-tour-list',
-  imports: [HttpClientModule],
+  imports: [HttpClientModule, ManagementPagingComponent],
   templateUrl: './tour-list.component.html',
   styleUrls: ['./tour-list.component.scss'],
   providers: [TourService, PluginInitializer]
@@ -20,6 +22,7 @@ export class TourListComponent implements OnInit {
   BasePaginationFilter: BasePaginationFilter<TourPaginationFilter> = new BasePaginationFilter<TourPaginationFilter>();
   tourOrderFilterEnum = TourOrderFilter;
   TourPaginationFilter: TourPaginationFilter = new TourPaginationFilter()
+  TourListBaseResponse: BaseResponse<TourList[]> = new BaseResponse<TourList[]>();
   TourList: TourList[] = [];
   constructor(private el: ElementRef,private router: Router ,private renderer: Renderer2, private pluginNotifyService: PluginNotifyService,
     private tourService: TourService, private PluginInitializer: PluginInitializer
@@ -45,6 +48,7 @@ export class TourListComponent implements OnInit {
         return;
       }
       this.TourList = response.Data || [];
+      this.TourListBaseResponse = response;
       (setTimeout(() => {
         this.PluginInitializer.initAOS(true);
       }, 100));
@@ -92,6 +96,10 @@ export class TourListComponent implements OnInit {
         break;
     }
     this.BasePaginationFilter.Filters = this.TourPaginationFilter;
+    this.BindTourListPagination();
+  }
+  onPageChange(page: number) {
+    this.BasePaginationFilter.PageNumber = page;
     this.BindTourListPagination();
   }
   goToDetails() {

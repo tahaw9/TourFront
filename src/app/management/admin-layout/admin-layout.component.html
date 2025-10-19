@@ -8,31 +8,37 @@
         <h2 class="mb-0">پنل مدیریت تورها</h2>
       </div>
       <div class="sidebar-menu">
-        <a (click)="dashboard()" class="menu-item active">
+        <a [routerLink]="['/admin']"
+           routerLinkActive="active"
+           [routerLinkActiveOptions]="{ exact: true }"
+           class="menu-item dashboard-page">
           <i class="bi bi-speedometer2"></i>
           <span>داشبورد</span>
         </a>
-        <a (click)="goToTourList()" class="menu-item">
+        <a [routerLink]="['/admin','ManageTours']"
+           routerLinkActive="active" class="menu-item tour-list">
           <i class="bi bi-house-door"></i>
           <span>مدیریت تور ها</span>
         </a>
-        <a (click)="goToLocationList()" class="menu-item">
+        <a [routerLink]="['/admin','ManageLocations']"
+           routerLinkActive="active" class="menu-item location-list">
           <i class="bi bi-water"></i>
           <span>مدیریت مقاصد (مکان ها)</span>
         </a>
-        <a href="#" class="menu-item">
+        <a class="menu-item reservation-list">
           <i class="bi bi-fish"></i>
           <span>مدیریت رزرو تور ها</span>
         </a>
-        <a href="#" class="menu-item">
+        <a [routerLink]="['/admin','ManageRoles']"
+           routerLinkActive="active" class="menu-item role-list">
           <i class="bi bi-bicycle"></i>
           <span>مدیریت نقش ها</span>
         </a>
-        <a href="#" class="menu-item">
+        <a class="menu-item user-list">
           <i class="bi bi-people"></i>
           <span>مدیریت کاربران</span>
         </a>
-        <a href="#" class="menu-item">
+        <a class="menu-item setting-page">
           <i class="bi bi-gear"></i>
           <span>تنظیمات</span>
         </a>
