@@ -9122,8 +9122,8 @@ blockquote {
 }
 
 .product-tab li {
-  margin-left: 10px;
-  margin-bottom: 10px;
+  margin-left: 10px !important;
+  margin-bottom: 10px !important;
 }
 
 .product-tab li a {
@@ -11749,6 +11749,35 @@ blockquote .blockquote-footer:before {
 .newsletter-form input {
   border: 0;
   padding: 11px 30px 11px 5px;
+}
+
+/* لیست پیشنهادات */
+.newsletter-form .suggestions-list {
+  position: absolute;
+  top: 100%;          /* دقیقا زیر input */
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 0 0 8px 8px;
+  max-height: 200px;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  z-index: 1000;      /* بالاتر از بقیه عناصر */
+}
+
+/* آیتم‌های لیست */
+.newsletter-form .suggestions-list li {
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+/* حالت hover */
+.newsletter-form .suggestions-list li:hover {
+  background: #f5f5f5;
 }
 
 @media only screen and (max-width: 375px) {
