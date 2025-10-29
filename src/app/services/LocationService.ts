@@ -10,6 +10,8 @@ import {InsLocation} from '../Models/Location/InsLocation';
 import {LocationPaginationFilter} from '../Models/Location/LocationPaginationFilter';
 import {LocationList} from '../Models/Location/LocationList';
 import {LocationCategorizedCount} from '../Models/Location/LocationCategorizedCount';
+import {LocationSearchResultCmb} from '../Models/Location/LocationSearchResultCmb';
+import {PaginationFilter} from '../Models/GenericModels/PaginationFilter';
 
 @Injectable({
   providedIn: 'root'
@@ -30,5 +32,9 @@ export class LocationService {
 
   GetLocationCategorizedCount(): Observable<BaseResponse<LocationCategorizedCount[]>> {
     return this.http.get<BaseResponse<LocationCategorizedCount[]>>(this.baseUrl + "Location/CategorizedCount");
+  }
+
+  SearchLocationsByName(searchInput: string): Observable<BaseResponse<LocationSearchResultCmb[]>> {
+    return this.http.get<BaseResponse<LocationSearchResultCmb[]>>(this.baseUrl + "Location/SearchLocationsByName?input=" + searchInput);
   }
 }

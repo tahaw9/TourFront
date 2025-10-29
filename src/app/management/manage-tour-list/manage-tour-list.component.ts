@@ -87,6 +87,11 @@ export class ManageTourListComponent implements OnInit {
       state: { tour: tour }
     });
   }
+  OpenInsertForm(){
+    this.router.navigate(['/admin/ManageTours/InsUp/1'], {
+      state: { tour: new TourList() }
+    });
+  }
 
   onPageChange(page: number) {
     this.BasePaginationFilter.PageNumber = page;

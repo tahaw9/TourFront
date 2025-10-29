@@ -21,13 +21,26 @@
                 <label for="tourName" class="form-label">نام تور</label>
                 <input type="text" class="form-control" id="tourName" placeholder="نام تور را وارد کنید" required>
               </div>
-              <div class="col-md-6 mb-3">
+              <div class="col-md-3 mb-3">
                 <label for="tourTypeSelect" class="form-label">نوع تور</label>
                 <div class="shop-shorter rel z-3">
-                  <select class="select-nice ms-xl-auto TourType-cmb" name="tourTypeSelect">
+                  <select class="select-nice TourType-cmb" name="tourTypeSelect">
                     @for (tourType of TourTypeSelect; track tourType.Guid) {
-                      <option (click)="tourTypeSelectChange(tourType.Guid)" [value]="tourType.Guid" [selected]="incomingTour.TourTypeGuid == tourType.Guid">{{tourType.Name}}</option>
+                      <option (click)="tourTypeSelectChange(tourType.Guid)" [value]="tourType.Guid"
+                              [selected]="incomingTour.TourTypeGuid == tourType.Guid">{{ tourType.Name }}
+                      </option>
                     }
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-3 mb-3">
+                <label for="tourDifficulty" class="form-label">سطح سختی</label>
+                <div class="shop-shorter rel z-2">
+                  <select class="select-nice TourDifficulty-cmb" id="tourDifficulty" required>
+                    <option value="easy">آسان</option>
+                    <option value="medium" selected>متوسط</option>
+                    <option value="hard">سخت</option>
+                    <option value="expert">خیلی سخت</option>
                   </select>
                 </div>
               </div>
@@ -40,11 +53,6 @@
                          class="form-control">
                 </div>
               </div>
-              <div class="col-md-6 mb-3">
-                <label for="participants" class="form-label">تعداد شرکت‌کنندگان</label>
-                <input type="number" class="form-control" id="participants" min="1" max="50"
-                       placeholder="تعداد را وارد کنید" required>
-              </div>
               <div class="col-12 mb-3">
                 <label for="tourDescription" class="form-label">توضیحات تور</label>
                 <textarea class="form-control" id="tourDescription" rows="3"
@@ -53,28 +61,91 @@
             </div>
           </div>
 
-          <!-- محل برگزاری -->
           <div class="form-section">
             <h5 class="form-section-title">
               <i class="bi bi-geo-alt"></i>
-              محل برگزاری
+              مبدا
             </h5>
             <div class="row">
               <div class="col-md-6 mb-3">
-                <label for="tourLocation" class="form-label">مکان</label>
-                <input type="text" class="form-control" id="tourLocation" placeholder="مکان برگزاری تور" required>
+                <div class="newsletter-form" style="background-color: #63AB45 !important;">
+                  <input class="tour-origin" [formControl]="originSearchControl" type="email"
+                         placeholder="شهر/شهرستان مبدا" style="background-color: #63AB45 !important;" required>
+                  <button type="button" [disabled]="true" (click)="SearchOriginLocationByName(originSearchControl)"
+                          class="theme-btn bgc-secondary style-two">
+                    <span data-hover="جستجو">جستجو</span>
+                    <i class="fal fa-arrow-right"></i>
+                  </button>
+                </div>
               </div>
               <div class="col-md-6 mb-3">
-                <label for="tourDifficulty" class="form-label">سطح سختی</label>
-                <select class="form-select" id="tourDifficulty" required>
-                  <option value="easy">آسان</option>
-                  <option value="medium" selected>متوسط</option>
-                  <option value="hard">سخت</option>
-                  <option value="expert">خیلی سخت</option>
-                </select>
+                <label class="form-label d-none d-md-block">&nbsp;</label>
+                @if (originSearchResult == null || originSearchResult.length < 1) {
+
+                  <span class="text-muted">چنان که مبدا مورد نظر در لیست وجود ندارد، ابتدا <a
+                    class="link-offset-3 link-underline" style="text-decoration: underline !important;">از اینجا</a> اضافه کنید</span>
+                }
+              </div>
+              <div class="col-md-6 mb-3">
+                <ul class="nav nav product-tab mt-70 mb-30" data-aos="fade-up" data-aos-duration="1500"
+                    data-aos-offset="50">
+                  @for (result of originSearchResult; track result.Guid) {
+                    <li><a (click)="insertTourModel.OriginGuid = result.Guid"
+                           [class.active]="insertTourModel.OriginGuid == result.Guid">{{ result.LocationName }}<i
+                      class="far fa-arrow-right"></i></a></li>
+                  }
+                </ul>
               </div>
               <div class="col-12 mb-3">
                 <label for="tourAddress" class="form-label">آدرس دقیق</label>
+                <textarea class="form-control" id="tourAddress" rows="2" placeholder="آدرس دقیق مبدا حرکت"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h5 class="form-section-title">
+              <i class="bi bi-geo-alt"></i>
+              مقصد نهایی
+            </h5>
+            <div class="row">
+              <!--              <div class="col-md-6 mb-3">-->
+              <!--                <label for="tourLocation" class="form-label">مکان</label>-->
+              <!--                <input type="text" class="form-control" id="tourLocation" placeholder="مکان برگزاری تور" required>-->
+              <!--              </div>-->
+              <div class="col-md-6 mb-3">
+                <div class="newsletter-form" style="background-color: #63AB45 !important;">
+                  <input class="tour-destination" [formControl]="destinationSearchControl"
+                         type="text" placeholder="شهر/شهرستان مقصد" style="background-color: #63AB45 !important;"
+                         required>
+                  <button type="button" [disabled]="destinationSearchOnBind"
+                          (click)="SearchDestLocationByName(destinationSearchControl)"
+                          class="theme-btn bgc-secondary style-two">
+                    <span data-hover="جستجو">جستجو</span>
+                    <i class="fal fa-arrow-right"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label d-none d-md-block">&nbsp;</label>
+                @if (destinationSearchResult == null || destinationSearchResult.length < 1) {
+                  <span class="text-muted">چنان که مقصد مورد نظر در لیست وجود ندارد، ابتدا <a
+                    class="link-offset-3 link-underline" style="text-decoration: underline !important;">از اینجا</a> اضافه کنید</span>
+                }
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <ul class="nav nav product-tab mt-70 mb-30" data-aos="fade-up" data-aos-duration="1500"
+                    data-aos-offset="50">
+                  @for (result of destinationSearchResult; track result.Guid) {
+                    <li><a (click)="insertTourModel.DestinationGuid = result.Guid"
+                           [class.active]="insertTourModel.DestinationGuid == result.Guid">{{ result.LocationName }}<i
+                      class="far fa-arrow-right"></i></a></li>
+                  }
+                </ul>
+              </div>
+              <div class="col-12 mb-3">
+                <label for="tourAddress" class="form-label">آدرس دقیق مقصد</label>
                 <textarea class="form-control" id="tourAddress" rows="2" placeholder="آدرس دقیق محل برگزاری"></textarea>
               </div>
             </div>
@@ -87,17 +158,27 @@
               تصاویر تور
             </h5>
             <div class="row">
-              <div class="col-12 mb-3">
-                <div class="image-upload-container" id="imageUpload">
-                  <div class="upload-icon">
-                    <i class="bi bi-cloud-arrow-up"></i>
-                  </div>
-                  <p>برای آپلود تصویر کلیک کنید یا آن را اینجا رها کنید</p>
-                  <p class="text-muted small">فرمت‌های مجاز: JPG, PNG, GIF - حداکثر سایز: 2MB</p>
-                  <input type="file" id="tourImage" accept="image/*" style="display: none;">
-                  <img id="imagePreview" class="image-preview" alt="پیش‌نمایش تصویر">
-                </div>
+              <div class="col-md-6 mb-3">
+                <label for="titleFile" class="form-label">تصویر تایتل تور</label>
+                <input
+                  class="form-control"
+                  type="file"
+                  id="titleFile"
+                  (change)="onTitleFileChange($event)"
+                  accept=".jpg,.jpeg,.png,.webp"
+                />
               </div>
+              @if (insertTourModel.TitleFile) {
+                <div class="mt-3">
+                  <p class="mb-1">پیش‌نمایش تصویر:</p>
+                  <img
+                    [src]="insertTourModel.TitleFile ? (insertTourModel.TitleFile | fileUrl) : ''"
+                    alt="preview"
+                    class="img-fluid rounded"
+                    style="max-height: 200px;"
+                  />
+                </div>
+              }
             </div>
           </div>
 
