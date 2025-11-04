@@ -37,4 +37,12 @@ export class LocationService {
   SearchLocationsByName(searchInput: string): Observable<BaseResponse<LocationSearchResultCmb[]>> {
     return this.http.get<BaseResponse<LocationSearchResultCmb[]>>(this.baseUrl + "Location/SearchLocationsByName?input=" + searchInput);
   }
+  // GetLocationByGuidForTourInsert(Guid: string): Observable<BaseResponse<LocationSearchResultCmb>> {
+  //   return this.http.get<BaseResponse<LocationSearchResultCmb>>(this.baseUrl + "Location/GetByGuid?Guid=" + Guid);
+  // }
+
+  GetLocationByGuid(Guid: string): Observable<BaseResponse<LocationList>> {
+    return this.http.get<BaseResponse<LocationList>>(this.baseUrl + "Location/GetByGuid?Guid=" + Guid);
+  }
+
 }

@@ -9,7 +9,7 @@
   <div class="row">
     <div class="col-12">
       <div class="form-container">
-        <form id="tourForm">
+        <form id="tourForm" #tourForm="ngForm" (ngSubmit)="SubmitForm(tourForm)">
           <!-- اطلاعات اصلی -->
           <div class="form-section">
             <h5 class="form-section-title">
@@ -18,8 +18,21 @@
             </h5>
             <div class="row">
               <div class="col-md-6 mb-3">
-                <label for="tourName" class="form-label">نام تور</label>
-                <input type="text" class="form-control" id="tourName" placeholder="نام تور را وارد کنید" required>
+                <label for="tourName" class="form-label">عنوان تور</label>
+                <input type="text" name="tourName" class="form-control" id="tourName"
+                       [(ngModel)]="insertTourModel.Title" placeholder="عنوان تور را وارد کنید" required
+                       #tourName="ngModel"
+                       [minlength]="5">
+                @if (formSubmitted && (tourName.invalid || tourName.dirty)) {
+                  <div class="text-danger">
+                    @if (tourName.errors?.['required']) {
+                      <div>وارد کردن عنوان تور الزامی است.</div>
+                    }
+                    @if (tourName.errors?.['minlength']) {
+                      <div>عنوان تور باید حداقل ۵ کاراکتر باشد.</div>
+                    }
+                  </div>
+                }
               </div>
               <div class="col-md-3 mb-3">
                 <label for="tourTypeSelect" class="form-label">نوع تور</label>
@@ -34,29 +47,30 @@
                 </div>
               </div>
               <div class="col-md-3 mb-3">
-                <label for="tourDifficulty" class="form-label">سطح سختی</label>
+                <label for="transportType" class="form-label">نوع حمل و نقل</label>
                 <div class="shop-shorter rel z-2">
-                  <select class="select-nice TourDifficulty-cmb" id="tourDifficulty" required>
-                    <option value="easy">آسان</option>
-                    <option value="medium" selected>متوسط</option>
-                    <option value="hard">سخت</option>
-                    <option value="expert">خیلی سخت</option>
+                  <select class="select-nice TransportType-cmb" id="transportType"> required>
+                    @for (transportType of TransportTypeSelect; track $index) {
+                      <option  [value]="transportType.Guid"
+                              [selected]="incomingTour.TransportTypeGuid == transportType.Guid">{{ transportType.Name }}
+                      </option>
+                    }
                   </select>
                 </div>
               </div>
-              <div class="col-md-6 mb-3">
-                <label for="tourDate" class="form-label">تاریخ برگزاری</label>
-                <div class="datepicker-container">
-                  <input type="text"
-                         #dp1="appDatepicker"
-                         [appDatepicker]="{ calendar: 'persian', locale: 'fa', rtl: true, theme:'dark' }"
-                         class="form-control">
-                </div>
-              </div>
+              <!--              <div class="col-md-6 mb-3">-->
+              <!--                <label for="tourDate" class="form-label">تاریخ برگزاری</label>-->
+              <!--                <div class="datepicker-container">-->
+              <!--                  <input type="text"-->
+              <!--                         #dp1="appDatepicker"-->
+              <!--                         [appDatepicker]="{ calendar: 'persian', locale: 'fa', rtl: true, theme:'dark' }"-->
+              <!--                         class="form-control">-->
+              <!--                </div>-->
+              <!--              </div>-->
               <div class="col-12 mb-3">
                 <label for="tourDescription" class="form-label">توضیحات تور</label>
-                <textarea class="form-control" id="tourDescription" rows="3"
-                          placeholder="توضیحات کامل درباره تور"></textarea>
+                <textarea class="form-control" id="tourDescription" name="tourDescription" rows="3"
+                          placeholder="توضیحات کامل درباره تور" [(ngModel)]="insertTourModel.Description"></textarea>
               </div>
             </div>
           </div>
@@ -69,7 +83,7 @@
             <div class="row">
               <div class="col-md-6 mb-3">
                 <div class="newsletter-form" style="background-color: #63AB45 !important;">
-                  <input class="tour-origin" [formControl]="originSearchControl" type="email"
+                  <input name="tourOrigin" class="tour-origin" [formControl]="originSearchControl" type="email"
                          placeholder="شهر/شهرستان مبدا" style="background-color: #63AB45 !important;" required>
                   <button type="button" [disabled]="true" (click)="SearchOriginLocationByName(originSearchControl)"
                           class="theme-btn bgc-secondary style-two">
@@ -96,10 +110,10 @@
                   }
                 </ul>
               </div>
-              <div class="col-12 mb-3">
-                <label for="tourAddress" class="form-label">آدرس دقیق</label>
-                <textarea class="form-control" id="tourAddress" rows="2" placeholder="آدرس دقیق مبدا حرکت"></textarea>
-              </div>
+              <!--              <div class="col-12 mb-3">-->
+              <!--                <label for="tourAddress" class="form-label">آدرس دقیق</label>-->
+              <!--                <textarea class="form-control" id="tourAddress" rows="2" placeholder="آدرس دقیق مبدا حرکت"></textarea>-->
+              <!--              </div>-->
             </div>
           </div>
 
@@ -116,7 +130,8 @@
               <div class="col-md-6 mb-3">
                 <div class="newsletter-form" style="background-color: #63AB45 !important;">
                   <input class="tour-destination" [formControl]="destinationSearchControl"
-                         type="text" placeholder="شهر/شهرستان مقصد" style="background-color: #63AB45 !important;"
+                         type="text" name="tourDestination" placeholder="شهر/شهرستان مقصد"
+                         style="background-color: #63AB45 !important;"
                          required>
                   <button type="button" [disabled]="destinationSearchOnBind"
                           (click)="SearchDestLocationByName(destinationSearchControl)"
@@ -144,10 +159,10 @@
                   }
                 </ul>
               </div>
-              <div class="col-12 mb-3">
-                <label for="tourAddress" class="form-label">آدرس دقیق مقصد</label>
-                <textarea class="form-control" id="tourAddress" rows="2" placeholder="آدرس دقیق محل برگزاری"></textarea>
-              </div>
+              <!--              <div class="col-12 mb-3">-->
+              <!--                <label for="tourAddress" class="form-label">آدرس دقیق مقصد</label>-->
+              <!--                <textarea class="form-control" id="tourAddress" rows="2" placeholder="آدرس دقیق محل برگزاری"></textarea>-->
+              <!--              </div>-->
             </div>
           </div>
 
@@ -163,16 +178,17 @@
                 <input
                   class="form-control"
                   type="file"
+                  name="titleFile"
                   id="titleFile"
                   (change)="onTitleFileChange($event)"
                   accept=".jpg,.jpeg,.png,.webp"
                 />
               </div>
-              @if (insertTourModel.TitleFile) {
+              @if (insertTourModel.TitleFile || (PageType == 2 && insertTourModel.ImageUrl != "" && insertTourModel.ImageUrl != null)) {
                 <div class="mt-3">
                   <p class="mb-1">پیش‌نمایش تصویر:</p>
                   <img
-                    [src]="insertTourModel.TitleFile ? (insertTourModel.TitleFile | fileUrl) : ''"
+                    [src]="GetImageSrc()"
                     alt="preview"
                     class="img-fluid rounded"
                     style="max-height: 200px;"
@@ -191,35 +207,43 @@
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="tourPrice" class="form-label">قیمت (تومان)</label>
-                <input type="number" class="form-control" id="tourPrice" min="0" placeholder="قیمت به تومان" required>
-              </div>
-              <div class="col-md-6 mb-3">
-                <label for="tourDiscount" class="form-label">تخفیف (%)</label>
-                <input type="number" class="form-control" id="tourDiscount" min="0" max="100" placeholder="درصد تخفیف">
+                <input type="text" name="tourPrice" [(ngModel)]="insertTourModel.Price" persianCurrency
+                       class="form-control" id="tourPrice" placeholder="قیمت به تومان" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="tourStatus" class="form-label">وضعیت تور</label>
-                <select class="form-select" id="tourStatus" required>
-                  <option value="active" selected>فعال</option>
-                  <option value="inactive">غیرفعال</option>
-                  <option value="draft">پیش‌نویس</option>
-                </select>
+                <div class="shop-shorter rel z-3">
+                  <select class="select-nice TourStatus-cmb" id="tourStatus" required>
+                    <option (click)="insertTourModel.IsActive = true" [value]="true"
+                            [selected]="insertTourModel.IsActive">فعال
+                    </option>
+                    <option (click)="insertTourModel.IsActive = false" [value]="false"
+                            [selected]="!insertTourModel.IsActive">غیرفعال
+                    </option>
+                  </select>
+                </div>
               </div>
-              <div class="col-md-6 mb-3">
-                <label for="tourCapacity" class="form-label">ظرفیت تور</label>
-                <input type="number" class="form-control" id="tourCapacity" min="1" placeholder="حداکثر ظرفیت" required>
-              </div>
+<!--              <div class="col-md-6 mb-3">-->
+<!--                <label for="tourCapacity" class="form-label">ظرفیت تور</label>-->
+<!--                <input type="number" name="tourCapacity" class="form-control" id="tourCapacity" min="1"-->
+<!--                       placeholder="حداکثر ظرفیت" required>-->
+<!--              </div>-->
             </div>
           </div>
 
           <!-- دکمه‌های فرم -->
           <div class="row mt-4">
-            <div class="col-12 d-flex justify-content-end">
-              <button type="button" class="btn btn-outline-secondary me-2">
-                <i class="bi bi-x-circle"></i> انصراف
+            <div class="col-12 d-flex justify-content-center">
+              <button type="submit"
+                      class="theme-btn bgc-secondary style-two">
+                <span data-hover="ثبت">ثبت</span>
+                <i style="-webkit-transform: '' !important; transform: none !important;" class="fal bi bi-check-circle"></i>
               </button>
-              <button (click)="readDate()" type="button" class="btn btn-primary">
-                <i class="bi bi-check-circle"></i> ذخیره تور
+              <button type="submit" [disabled]=""
+                      (click)="SearchDestLocationByName(destinationSearchControl)"
+                      class="theme-btn text-dark bgc-lighter style-two">
+                <span data-hover="بازگشت">بازگشت</span>
+                <i style="-webkit-transform: '' !important; transform: none !important;" class="fal bi bi-x-circle"></i>
               </button>
             </div>
           </div>

@@ -18,6 +18,7 @@ export class PluginInitializer {
   }
 
   private initNiceSelect() {
+    debugger
     const $filters = $('.select-nice');
     if ($filters.length) {
       if ($filters.next('.nice-select').length) {

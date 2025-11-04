@@ -1,18 +1,23 @@
-import {Component, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, Renderer2, SimpleChanges, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TourList} from '../../../Models/Tour/TourList';
-import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormControl, FormsModule, NgForm, ReactiveFormsModule} from '@angular/forms';
 import {TourType} from '../../../Models/TourType/TourType';
-import {TourService} from '../../../services/TourService';
 import {TourTypeService} from '../../../services/TourTypeService';
 import {HttpClientModule} from '@angular/common/http';
 import {DatepickerDirective} from '../../../directives/datepicker.directive';
 import {TourInsUp} from '../../../Models/Tour/TourInsUp';
 import {FileUrlPipe} from '../../../pipes/FileUrlPipe';
 import {LocationSearchResultCmb} from '../../../Models/Location/LocationSearchResultCmb';
-import {catchError, debounceTime, distinctUntilChanged, finalize, of, switchMap, tap} from 'rxjs';
+import {catchError, debounceTime, distinctUntilChanged, finalize, switchMap, tap} from 'rxjs';
 import {filter} from 'rxjs/operators';
 import {LocationService} from '../../../services/LocationService';
+import {PersianCurrencyDirective} from '../../../directives/persian-currency-directive';
+import {TransportTypeService} from '../../../services/TransportTypeService';
+import {TransportType} from '../../../Models/TransportType/TransportType';
+import {TourService} from '../../../services/TourService';
+import {environment} from '../../../environments/environment';
+import {BaseResponse} from '../../../Models/BaseResponse';
 
 @Component({
   selector: 'app-manage-tour-insUp',
@@ -20,12 +25,12 @@ import {LocationService} from '../../../services/LocationService';
   imports: [
     ReactiveFormsModule,
     HttpClientModule,
-    DatepickerDirective,
+    // DatepickerDirective,
     FormsModule,
-    FileUrlPipe
+    PersianCurrencyDirective,
   ],
   styleUrls: ['./manage-tour-insUp.component.css'],
-  providers: [TourTypeService, LocationService]
+  providers: [TourTypeService, LocationService, TransportTypeService, TourService, FileUrlPipe]
 })
 export class ManageTourInsUpComponent implements OnInit {
 
@@ -33,6 +38,7 @@ export class ManageTourInsUpComponent implements OnInit {
   insertTourModel: TourInsUp = new TourInsUp();
   PageType : number = 0;
   TourTypeSelect: TourType[] = [];
+  TransportTypeSelect: TransportType[] = [];
 
   destinationSearchControl: FormControl = new FormControl('');
   destinationSearchResult: LocationSearchResultCmb[] | null = [];
@@ -43,14 +49,30 @@ export class ManageTourInsUpComponent implements OnInit {
   originSearchOnBind: boolean = false;
   @ViewChild('dp1') dp1!: DatepickerDirective;
 
-  constructor(private route: ActivatedRoute, private  TourTypeService: TourTypeService, private LocationService: LocationService) {
+  constructor(private route: ActivatedRoute,private router: Router,private el: ElementRef,private renderer: Renderer2
+              ,private  TourService: TourService,private FileUrlPipe: FileUrlPipe, private  TourTypeService: TourTypeService, private LocationService: LocationService, private TransportTypeService: TransportTypeService) {
     this.BindTourTypeFilter();
+    this.BindTransportTypeFilter();
   }
 
   ngOnInit() {
     this.PageType = parseInt(this.route.snapshot.paramMap.get('PageType') ?? "0");
-    this.incomingTour = history.state.tour;
-    console.log(this.incomingTour);
+    if(this.PageType == 2){
+      this.incomingTour = history.state.tour;
+      Object.keys(this.insertTourModel).forEach((key) => {
+        const k = key as keyof TourInsUp;
+
+        if (k in this.incomingTour) {
+          (this.insertTourModel as any)[k] = (this.incomingTour as any)[k];
+        }
+      });
+      if(this.insertTourModel.OriginGuid != null && this.insertTourModel.OriginGuid != ""){
+        this.BindLocation(this.insertTourModel.OriginGuid, true, false);
+      }
+      if(this.insertTourModel.DestinationGuid != null && this.insertTourModel.DestinationGuid != ""){
+        this.BindLocation(this.insertTourModel.DestinationGuid, false, true);
+      }
+    }
 
     this.originSearchControl.valueChanges.pipe(
       debounceTime(350),
@@ -77,12 +99,29 @@ export class ManageTourInsUpComponent implements OnInit {
 
 
 
-
   }
   ngOnChanges() {
     (setTimeout(() => {
-      ($('.TourType-cmb, .TourDifficulty-cmb')).niceSelect('update');
+      ($('.TourType-cmb, .TransportType-cmb, .TourStatus-cmb')).niceSelect('update');
+      this.importClickEvent();
     }, 100));
+  }
+
+  importClickEvent() {
+    const lis1 = this.el.nativeElement.querySelectorAll('div.TransportType-cmb ul li');
+    const lis2 = this.el.nativeElement.querySelectorAll('div.TourType-cmb ul li');
+    lis1.forEach((li: HTMLElement) => {
+      this.renderer.listen(li, 'click', () => {
+        const dataValue = li.getAttribute('data-value');
+        this.transportTypeSelectChange(dataValue ?? "");
+      });
+    });
+    lis2.forEach((li: HTMLElement) => {
+      this.renderer.listen(li, 'click', () => {
+        const dataValue = li.getAttribute('data-value');
+        this.tourTypeSelectChange(dataValue ?? "");
+      });
+    });
   }
 
   SearchOriginLocationByName(item : FormControl){
@@ -133,13 +172,32 @@ export class ManageTourInsUpComponent implements OnInit {
         this.TourTypeSelect = response.Data || [];
         (setTimeout(() => {
           ($('.TourType-cmb')).niceSelect('update');
+          this.importClickEvent();
+        }, 100));
+      }
+    })
+  }
+
+  BindTransportTypeFilter(){
+    this.TransportTypeService.GetAll().subscribe(response => {
+      if (!response.succcess) {
+        console.log(response.Message);
+      }
+      else{
+        this.TransportTypeSelect = response.Data || [];
+        (setTimeout(() => {
+          ($('.TransportType-cmb')).niceSelect('update');
+          this.importClickEvent();
         }, 100));
       }
     })
   }
 
   tourTypeSelectChange(Guid: string) {
-    this.incomingTour.TourTypeGuid = Guid;
+    this.insertTourModel.TourTypeGuid = Guid;
+  }
+  transportTypeSelectChange(Guid: string) {
+    this.insertTourModel.TransportTypeGuid = Guid;
   }
 
   readDate() {
@@ -177,5 +235,50 @@ export class ManageTourInsUpComponent implements OnInit {
     }
 
     this.insertTourModel.TitleFile = file;
+    this.insertTourModel.ImageUrl = "";
+  }
+
+  GetImageSrc() : string {
+    if(this.PageType == 2 && this.insertTourModel.ImageUrl != "" && this.insertTourModel.ImageUrl != null){
+      return environment.FilesDirectory + this.insertTourModel.ImageUrl;
+    }
+    else if(this.insertTourModel.TitleFile != null &&  this.insertTourModel.ImageUrl == "" ){
+      return this.FileUrlPipe.transform( this.insertTourModel.TitleFile);
+    }
+    return "";
+  }
+
+  BindLocation(Guid: string, isOrigin:boolean = false, isDestination:boolean = false){
+    this.LocationService.GetLocationByGuid(Guid).subscribe(res => {
+      debugger
+      let location = new LocationSearchResultCmb();
+      if(res.Data){
+        location.Guid = res.Data?.Guid;
+        location.LocationName = res.Data?.Name ?? "";
+        if(isOrigin == true){
+          this.originSearchResult?.push(location);
+        }
+        if(isDestination == true){
+          this.destinationSearchResult?.push(location);
+        }
+      }
+    }, (e) => {
+      console.log(e.error)
+    })
+  }
+
+  formSubmitted: boolean = false;
+  SubmitForm(form: NgForm) {
+    this.formSubmitted = true;
+
+    if (!form.valid) {
+      return;
+    }
+    debugger
+    this.TourService.InsertTour(this.insertTourModel).subscribe(response => {
+      this.router.navigate(['/admin', 'ManageTours']);
+    }, (e) => {
+      console.log(e);
+    })
   }
 }

@@ -12,5 +12,6 @@ export class TourList {
   DestinationGuid: string = "";
   DestinationName: string = "";
   Price: number = 0;
+  ImageUrl: string = "";
   TourInfoGuids: string[] = [];
 }

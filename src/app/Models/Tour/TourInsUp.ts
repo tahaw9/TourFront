@@ -16,4 +16,6 @@ export class TourInsUp{
   Price: number = 0;
   TourInfoGuids: string[] = [];
   TitleFile: File|null = null;
+  ImageUrl: string = "";
+  IsActive: boolean = true;
 }
