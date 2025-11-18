@@ -27,9 +27,18 @@ export class TourService {
     if (data.TitleFile) {
       formData.append('file', data.TitleFile);
     }
-
-    debugger
     formData.append('command', JSON.stringify(data));
     return this.http.post<BaseResponse<string>>(this.baseUrl + "Tour/Insert", formData);
+  }
+
+  UpdateTour(data: TourInsUp): Observable<BaseResponse<boolean>> {
+    const formData = new FormData();
+
+    if (data.TitleFile) {
+      formData.append('file', data.TitleFile);
+    }
+
+    formData.append('command', JSON.stringify(data));
+    return this.http.put<BaseResponse<boolean>>(this.baseUrl + "Tour/Update", formData);
   }
 }

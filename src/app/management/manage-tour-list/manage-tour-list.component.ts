@@ -35,6 +35,8 @@ export class ManageTourListComponent implements OnInit {
   TourTypeCombo: TourType[] = [];
   TourListBaseResponse: BaseResponse<TourList[]> = new BaseResponse<TourList[]>();
   TourTypeGuidFilter: string = "";
+  TourNameFilter: string = "";
+  BindPagingError: string = "";
   constructor(private tourService: TourService,private TourTypeService: TourTypeService, private AuthService: AuthService, private PluginInitializer: PluginInitializer,private router: Router) { }
 
   ngOnInit() {
@@ -45,6 +47,7 @@ export class ManageTourListComponent implements OnInit {
 
   BindTourListPagination() {
     this.tourService.GetWithPagination(this.BasePaginationFilter).subscribe(response => {
+      this.BindPagingError = "";
       if (!response.succcess) {
         console.log(response.Message);
         return;
@@ -57,7 +60,8 @@ export class ManageTourListComponent implements OnInit {
       console.log(this.TourList);
       console.log(response)
     }, (e) => {
-
+      console.log(e);
+      this.BindPagingError = e.error.Message;
     })
   }
 
@@ -95,6 +99,27 @@ export class ManageTourListComponent implements OnInit {
 
   onPageChange(page: number) {
     this.BasePaginationFilter.PageNumber = page;
+    this.BindTourListPagination();
+  }
+
+  SearchWithFilters() {
+    debugger
+    this.BasePaginationFilter.Filters = new TourPaginationFilter();
+    // const LocationLevelFilter = document.querySelector('.LocationLevel-cmb li.selected');
+    // if (LocationLevelFilter) {
+    //   const LocationLevelGuidFilter = LocationLevelFilter.getAttribute('data-value');
+    //   if (LocationLevelGuidFilter != "" && LocationLevelGuidFilter != null) {
+    //     this.BasePaginationFilter.Filters.LocationLevelGuid = LocationLevelGuidFilter;
+    //   }
+    // }
+    if(this.TourNameFilter != "" && this.TourNameFilter != null) {
+      this.BasePaginationFilter.Filters.title = this.TourNameFilter;
+    }
+    this.BindTourListPagination();
+  }
+  ClearFilters(){
+    this.TourNameFilter = "";
+    this.BasePaginationFilter.Filters = null;
     this.BindTourListPagination();
   }
 

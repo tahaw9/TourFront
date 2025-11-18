@@ -51,7 +51,7 @@
                 <div class="shop-shorter rel z-2">
                   <select class="select-nice TransportType-cmb" id="transportType"> required>
                     @for (transportType of TransportTypeSelect; track $index) {
-                      <option  [value]="transportType.Guid"
+                      <option [value]="transportType.Guid"
                               [selected]="incomingTour.TransportTypeGuid == transportType.Guid">{{ transportType.Name }}
                       </option>
                     }
@@ -223,22 +223,33 @@
                   </select>
                 </div>
               </div>
-<!--              <div class="col-md-6 mb-3">-->
-<!--                <label for="tourCapacity" class="form-label">ظرفیت تور</label>-->
-<!--                <input type="number" name="tourCapacity" class="form-control" id="tourCapacity" min="1"-->
-<!--                       placeholder="حداکثر ظرفیت" required>-->
-<!--              </div>-->
+              <!--              <div class="col-md-6 mb-3">-->
+              <!--                <label for="tourCapacity" class="form-label">ظرفیت تور</label>-->
+              <!--                <input type="number" name="tourCapacity" class="form-control" id="tourCapacity" min="1"-->
+              <!--                       placeholder="حداکثر ظرفیت" required>-->
+              <!--              </div>-->
             </div>
           </div>
 
           <!-- دکمه‌های فرم -->
           <div class="row mt-4">
             <div class="col-12 d-flex justify-content-center">
-              <button type="submit"
-                      class="theme-btn bgc-secondary style-two">
-                <span data-hover="ثبت">ثبت</span>
-                <i style="-webkit-transform: '' !important; transform: none !important;" class="fal bi bi-check-circle"></i>
-              </button>
+              @if (PageType == 2) {
+                <button type="submit"
+                        class="theme-btn bgc-secondary style-two">
+                  <span data-hover="ویرایش">ویرایش</span>
+                  <i style="-webkit-transform: '' !important; transform: none !important;"
+                     class="fal bi bi-pencil"></i>
+                </button>
+              } @else {
+
+                <button type="submit"
+                        class="theme-btn bgc-secondary style-two">
+                  <span data-hover="ثبت">ثبت</span>
+                  <i style="-webkit-transform: '' !important; transform: none !important;"
+                     class="fal bi bi-check-circle"></i>
+                </button>
+              }
               <button type="submit" [disabled]=""
                       (click)="SearchDestLocationByName(destinationSearchControl)"
                       class="theme-btn text-dark bgc-lighter style-two">

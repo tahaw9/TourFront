@@ -6,6 +6,7 @@ export enum TourOrderFilter {
 }
 
 export class TourPaginationFilter {
+  title?: string | null;
   tourOrderFilter?: TourOrderFilter | null;
   tourTypeGuid?: string | null;
   durationNight?: number | null;

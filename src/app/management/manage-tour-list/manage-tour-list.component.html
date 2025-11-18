@@ -21,12 +21,14 @@
   <div class="filter-section">
     <div class="filter-group">
       <label class="filter-label">جستجو</label>
-      <input type="text" class="filter-input" placeholder="نام تور یا مقصد...">
+      <input [(ngModel)]="TourNameFilter" type="text" class="filter-input" placeholder="نام تور یا مقصد...">
     </div>
     <div class="shop-shorter filter-group rel z-3">
       <select class="select-nice ms-xl-auto TourType-cmb">
         @for (tourType of TourTypeCombo; track tourType.Guid) {
-          <option (click)="tourTypeFilterChange(tourType.Guid)" [value]="tourType.Guid" selected="">{{tourType.Name}}</option>
+          <option (click)="tourTypeFilterChange(tourType.Guid)" [value]="tourType.Guid"
+                  selected="">{{ tourType.Name }}
+          </option>
         }
       </select>
       <select class="select-nice ms-xl-auto">
@@ -38,9 +40,13 @@
         <option value="5-star">5 ستاره</option>
       </select>
     </div>
-    <div class="filter-group">
-      <button class="btn btn-primary" style="height: 45px;">
+    <div class="filter-group d-flex gap-2">
+      <button (click)="SearchWithFilters()" class="btn btn-primary" style="height: 45px;">
         اعمال فیلترها
+      </button>
+
+      <button (click)="ClearFilters()" class="btn btn-danger" style="height: 45px;">
+        حذف فیلترها
       </button>
     </div>
   </div>
@@ -96,43 +102,51 @@
       </div>
     </div>
 
-    <div class="table-responsive">
-      <table class="tours-table">
-        <thead>
-        <tr>
-          <th>نام تور</th>
-          <th>نوع</th>
-          <th>مبدا</th>
-          <th>حمل و نقل</th>
-          <th>مقصد</th>
-          <th>قیمت</th>
-          <th>وضعیت</th>
-          <th>عملیات</th>
-        </tr>
-        </thead>
-        <tbody>
-          @for (tour of TourList; track $index) {
-            <tr>
-              <td>{{ tour.Title }}</td>
-              <td>{{tour.TourTypeName}}</td>
-              <td>{{tour.OriginName}}</td>
-              <td>{{tour.TransportTypeName}}</td>
-              <td>{{tour.DestinationName}}</td>
-              <td>{{tour.Price | persianNumber:true}}</td>
-              <td><span class="status-badge status-active">فعال</span></td>
-              <td>
-                <div class="action-buttons">
-                  <button class="action-btn btn-view"><i class="bi bi-eye"></i></button>
-                  <button (click)="OpenEditForm(tour)" class="action-btn btn-edit"><i class="bi bi-pencil"></i></button>
-                  <button class="action-btn btn-delete"><i class="bi bi-trash"></i></button>
-                </div>
-              </td>
-            </tr>
+    @if (!!BindPagingError) {
+      <div class="row text-center">
+        <span>{{ BindPagingError }}</span>
+      </div>
+    } @else {
+      <div class="table-responsive">
+        <table class="tours-table">
+          <thead>
+          <tr>
+            <th>نام تور</th>
+            <th>نوع</th>
+            <th>مبدا</th>
+            <th>حمل و نقل</th>
+            <th>مقصد</th>
+            <th>قیمت</th>
+            <th>وضعیت</th>
+            <th>عملیات</th>
+          </tr>
+          </thead>
+          <tbody>
+            @for (tour of TourList; track $index) {
+              <tr>
+                <td>{{ tour.Title }}</td>
+                <td>{{ tour.TourTypeName }}</td>
+                <td>{{ tour.OriginName }}</td>
+                <td>{{ tour.TransportTypeName }}</td>
+                <td>{{ tour.DestinationName }}</td>
+                <td>{{ tour.Price | persianNumber:true }}</td>
+                <td><span class="status-badge status-active">فعال</span></td>
+                <td>
+                  <div class="action-buttons">
+                    <button class="action-btn btn-view"><i class="bi bi-eye"></i></button>
+                    <button (click)="OpenEditForm(tour)" class="action-btn btn-edit"><i class="bi bi-pencil"></i>
+                    </button>
+                    <button class="action-btn btn-delete"><i class="bi bi-trash"></i></button>
+                  </div>
+                </td>
+              </tr>
 
-          }
-        </tbody>
-      </table>
-    </div>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+
 
     <!-- صفحه‌بندی -->
     <app-management-paging

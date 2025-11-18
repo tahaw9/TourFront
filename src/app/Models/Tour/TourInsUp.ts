@@ -17,5 +17,6 @@ export class TourInsUp{
   TourInfoGuids: string[] = [];
   TitleFile: File|null = null;
   ImageUrl: string = "";
+  DeletedOldFile: string = "";
   IsActive: boolean = true;
 }

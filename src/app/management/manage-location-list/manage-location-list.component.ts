@@ -67,7 +67,6 @@ export class ManageLocationListComponent implements OnInit {
 
 
   SearchWithFilters() {
-    debugger
     this.BasePaginationFilter.Filters = new LocationPaginationFilter();
     const LocationLevelFilter = document.querySelector('.LocationLevel-cmb li.selected');
     if (LocationLevelFilter) {

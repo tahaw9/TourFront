@@ -29,7 +29,7 @@ import {BaseResponse} from '../../../Models/BaseResponse';
     FormsModule,
     PersianCurrencyDirective,
   ],
-  styleUrls: ['./manage-tour-insUp.component.css'],
+  styleUrls: ['./manage-tour-insUp.component.scss'],
   providers: [TourTypeService, LocationService, TransportTypeService, TourService, FileUrlPipe]
 })
 export class ManageTourInsUpComponent implements OnInit {
@@ -235,6 +235,9 @@ export class ManageTourInsUpComponent implements OnInit {
     }
 
     this.insertTourModel.TitleFile = file;
+    if(!!this.insertTourModel.ImageUrl?.length){
+      this.insertTourModel.DeletedOldFile = this.insertTourModel.ImageUrl;
+    }
     this.insertTourModel.ImageUrl = "";
   }
 
@@ -274,11 +277,18 @@ export class ManageTourInsUpComponent implements OnInit {
     if (!form.valid) {
       return;
     }
-    debugger
-    this.TourService.InsertTour(this.insertTourModel).subscribe(response => {
-      this.router.navigate(['/admin', 'ManageTours']);
-    }, (e) => {
-      console.log(e);
-    })
+    if(!!this.insertTourModel.Guid?.length && this.insertTourModel.Guid != environment.EmptyGuid && this.PageType == 2){
+      this.TourService.UpdateTour(this.insertTourModel).subscribe(response => {
+        this.router.navigate(['/admin', 'ManageTours']);
+      }, (e) => {
+        console.log(e);
+      })
+    }else{
+      this.TourService.InsertTour(this.insertTourModel).subscribe(response => {
+        this.router.navigate(['/admin', 'ManageTours']);
+      }, (e) => {
+        console.log(e);
+      })
+    }
   }
 }

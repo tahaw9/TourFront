@@ -74,7 +74,6 @@ export class TourListComponent implements OnInit {
       .map(([key, value]) => ({ key, value: value as number }));
   }
   onOrderChange(value: string | null) {
-    debugger
     switch (value) {
       case "1":
         this.TourPaginationFilter.tourOrderFilter = TourOrderFilter.HighToLowPrice;
