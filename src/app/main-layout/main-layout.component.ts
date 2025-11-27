@@ -38,12 +38,10 @@ export class MainLayoutComponent implements OnInit {
   }
 
   goToTourList() {
-    this.router.navigate(['/TourList']).then(r => {
-    });
+    this.router.navigate(['/TourList']).then();
   }
   goToAboutUs() {
-    this.router.navigate(['/AboutUs']).then(r => {
-    });
+    this.router.navigate(['/AboutUs']).then();
   }
   // private hidePreloader(): void {
   //   const preloader = document.querySelector('.preloader');
