@@ -1,4 +1,4 @@
-import {Component, OnInit, Renderer2} from '@angular/core';
+import {Component, OnInit, Renderer2, ViewEncapsulation} from '@angular/core';
 import {NavigationEnd, Router, RouterOutlet} from '@angular/router';
 import {filter} from 'rxjs/operators';
 import {NgClass} from '@angular/common';
@@ -10,7 +10,8 @@ import {NgClass} from '@angular/common';
     NgClass,
     RouterOutlet
   ],
-  styleUrls: ['./main-layout.component.css']
+  styleUrls: ['../../assets/css/style.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class MainLayoutComponent implements OnInit {
   headerClass = 'main-header header-one white-menu menu-absolute';

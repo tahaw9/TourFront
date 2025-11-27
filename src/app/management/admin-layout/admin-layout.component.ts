@@ -1,4 +1,4 @@
-import {Component, HostListener, OnInit, Renderer2} from '@angular/core';
+import {Component, HostListener, OnInit, Renderer2, ViewEncapsulation} from '@angular/core';
 import {Router, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
 
@@ -10,7 +10,8 @@ import {HttpClientModule} from '@angular/common/http';
     RouterLink,
     RouterLinkActive
   ],
-  styleUrls: ['./admin-layout.component.scss']
+  styleUrls: ['../style.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AdminLayoutComponent implements OnInit {
   isSidebarOpen: boolean = false;
@@ -41,6 +42,7 @@ export class AdminLayoutComponent implements OnInit {
 
   closeSidebar() {
     this.isSidebarOpen = false;
+    this.renderer.removeClass(document.body, 'sidebar-open');
   }
 
   @HostListener('document:click', ['$event'])
