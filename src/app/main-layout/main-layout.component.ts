@@ -1,4 +1,4 @@
-import {Component, OnInit, Renderer2, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {NavigationEnd, Router, RouterOutlet} from '@angular/router';
 import {filter} from 'rxjs/operators';
 import {NgClass} from '@angular/common';
