@@ -18,7 +18,7 @@ export class MainLayoutComponent implements OnInit {
   headerUpperClass = 'header-upper py-30 rpy-0'
 
   constructor(
-    private router: Router, private renderer: Renderer2) {
+    private router: Router) {
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe(event => {

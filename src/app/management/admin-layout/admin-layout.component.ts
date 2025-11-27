@@ -1,7 +1,5 @@
 import {Component, HostListener, OnInit, Renderer2, ViewEncapsulation} from '@angular/core';
 import {Router, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
-import {HttpClientModule} from '@angular/common/http';
-
 @Component({
   selector: 'app-admin-layout',
   templateUrl: './admin-layout.component.html',
@@ -17,7 +15,7 @@ export class AdminLayoutComponent implements OnInit {
   isSidebarOpen: boolean = false;
   IsLandscape: boolean = true;
 
-  constructor(private renderer: Renderer2, private router: Router) {
+  constructor(private renderer: Renderer2) {
   }
 
   ngOnInit() {
