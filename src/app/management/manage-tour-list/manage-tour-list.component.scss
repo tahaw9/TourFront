@@ -352,11 +352,6 @@ body {
   color: var(--success-color);
 }
 
-.btn-edit:hover {
-  background: var(--success-color);
-  color: white;
-}
-
 .btn-delete {
   background: rgba(239, 68, 68, 0.1);
   color: var(--danger-color);
@@ -398,3 +393,8 @@ body {
     flex-wrap: wrap;
   }
 }
+
+
+
+
+

@@ -36,7 +36,7 @@
               </div>
               <div class="col-md-3 mb-3">
                 <label for="tourTypeSelect" class="form-label">نوع تور</label>
-                <div class="shop-shorter rel z-3">
+                <div class="management-select rel z-3">
                   <select class="select-nice TourType-cmb" name="tourTypeSelect">
                     @for (tourType of TourTypeSelect; track tourType.Guid) {
                       <option (click)="tourTypeSelectChange(tourType.Guid)" [value]="tourType.Guid"
@@ -48,7 +48,7 @@
               </div>
               <div class="col-md-3 mb-3">
                 <label for="transportType" class="form-label">نوع حمل و نقل</label>
-                <div class="shop-shorter rel z-2">
+                <div class="management-select rel z-2">
                   <select class="select-nice TransportType-cmb" id="transportType"> required>
                     @for (transportType of TransportTypeSelect; track $index) {
                       <option [value]="transportType.Guid"
@@ -212,7 +212,7 @@
               </div>
               <div class="col-md-6 mb-3">
                 <label for="tourStatus" class="form-label">وضعیت تور</label>
-                <div class="shop-shorter rel z-3">
+                <div class="management-select rel z-3">
                   <select class="select-nice TourStatus-cmb" id="tourStatus" required>
                     <option (click)="insertTourModel.IsActive = true" [value]="true"
                             [selected]="insertTourModel.IsActive">فعال
@@ -236,7 +236,7 @@
             <div class="col-12 d-flex justify-content-center">
               @if (PageType == 2) {
                 <button type="submit"
-                        class="theme-btn bgc-secondary style-two">
+                        class="theme-btn bgc-secondary submit-action-button">
                   <span data-hover="ویرایش">ویرایش</span>
                   <i style="-webkit-transform: '' !important; transform: none !important;"
                      class="fal bi bi-pencil"></i>
@@ -244,7 +244,7 @@
               } @else {
 
                 <button type="submit"
-                        class="theme-btn bgc-secondary style-two">
+                        class="theme-btn bgc-secondary submit-action-button">
                   <span data-hover="ثبت">ثبت</span>
                   <i style="-webkit-transform: '' !important; transform: none !important;"
                      class="fal bi bi-check-circle"></i>
@@ -252,7 +252,7 @@
               }
               <button type="submit" [disabled]=""
                       (click)="SearchDestLocationByName(destinationSearchControl)"
-                      class="theme-btn text-dark bgc-lighter style-two">
+                      class="theme-btn bgc-lighter style1-action-button">
                 <span data-hover="بازگشت">بازگشت</span>
                 <i style="-webkit-transform: '' !important; transform: none !important;" class="fal bi bi-x-circle"></i>
               </button>

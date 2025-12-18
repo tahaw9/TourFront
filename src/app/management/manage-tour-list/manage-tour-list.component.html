@@ -23,7 +23,7 @@
       <label class="filter-label">جستجو</label>
       <input [(ngModel)]="TourNameFilter" type="text" class="filter-input" placeholder="نام تور یا مقصد...">
     </div>
-    <div class="shop-shorter filter-group rel z-3">
+    <div class="management-select filter-group rel z-3">
       <select class="select-nice ms-xl-auto TourType-cmb">
         @for (tourType of TourTypeCombo; track tourType.Guid) {
           <option (click)="tourTypeFilterChange(tourType.Guid)" [value]="tourType.Guid"
@@ -111,6 +111,7 @@
         <table class="tours-table">
           <thead>
           <tr>
+            <th>ردیف</th>
             <th>نام تور</th>
             <th>نوع</th>
             <th>مبدا</th>
@@ -124,6 +125,7 @@
           <tbody>
             @for (tour of TourList; track $index) {
               <tr>
+                <td>{{ ((BasePaginationFilter.PageSize * (BasePaginationFilter.PageNumber - 1)) + $index + 1) | persianNumber }}</td>
                 <td>{{ tour.Title }}</td>
                 <td>{{ tour.TourTypeName }}</td>
                 <td>{{ tour.OriginName }}</td>

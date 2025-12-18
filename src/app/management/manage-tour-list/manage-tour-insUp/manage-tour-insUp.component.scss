@@ -1,5 +1,8 @@
 @media only screen and (max-width: 1199px) {
-  .shop-shorter {
+  .management-select {
     margin-right: 0 !important;
   }
+}
+.tour-origin:focus,.tour-destination:focus{
+  outline: none;
 }

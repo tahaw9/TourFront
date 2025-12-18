@@ -12,6 +12,7 @@ import {ManageTourInsUpComponent} from './management/manage-tour-list/manage-tou
 import {ManageLocationListComponent} from './management/manage-location-list/manage-location-list.component';
 import {LoginComponent} from './auth/login/login.component';
 import {ManageRoleListComponent} from './management/manage-role-list/manage-role-list.component';
+import {ManageTourInfoListComponent} from './management/manage-tour-info-list/manage-tour-info-list';
 export const routes: Routes = [
   {path: 'login', component: LoginComponent },
   {
@@ -33,6 +34,7 @@ export const routes: Routes = [
       { path: '', component: DashboardComponent }, // /admin
       { path: 'ManageLocations', component: ManageLocationListComponent },
       { path: 'ManageTours', component: ManageTourListComponent },
+      { path: 'ManageTourInfos', component: ManageTourInfoListComponent },
       { path: 'ManageRoles', component: ManageRoleListComponent },
       { path: 'ManageTours/InsUp/:PageType', component: ManageTourInsUpComponent }
       // { path: 'users', component: AdminUsersComponent }, // /admin/users
