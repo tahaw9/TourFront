@@ -14,16 +14,18 @@ import {TourType} from '../../Models/TourType/TourType';
 import {AuthService} from '../../services/AuthService';
 import {ManagementPagingComponent} from '../management-paging/management-paging.component';
 import {PersianNumberPipe} from '../../pipes/PersianNumberPipe';
+import {filter} from 'rxjs/operators';
+import {BaseSelectNiceComponent} from '../../Base/base-select-nice/base-select-nice';
 
 @Component({
   selector: 'app-manage-tour-list',
   templateUrl: './manage-tour-list.component.html',
   imports: [
     FormsModule,
-    DecimalPipe,
     HttpClientModule,
     ManagementPagingComponent,
-    PersianNumberPipe
+    PersianNumberPipe,
+    BaseSelectNiceComponent
   ],
   styleUrls: ['./manage-tour-list.component.scss'],
   providers: [TourService, TourTypeService, AuthService]
@@ -54,9 +56,9 @@ export class ManageTourListComponent implements OnInit {
       }
       this.TourList = response.Data || [];
       this.TourListBaseResponse = response;
-      (setTimeout(() => {
-        this.PluginInitializer.initAOS(true);
-      }, 100));
+      // (setTimeout(() => {
+      //   this.PluginInitializer.initAOS(true);
+      // }, 100));
       console.log(this.TourList);
       console.log(response)
     }, (e) => {
@@ -71,10 +73,10 @@ export class ManageTourListComponent implements OnInit {
         console.log(response.Message);
       }
       else{
-        this.TourTypeCombo = response.Data || [];
-        (setTimeout(() => {
-          ($('.TourType-cmb')).niceSelect('update');
-        }, 100));
+        // this.TourTypeCombo = response.Data || [];
+        // (setTimeout(() => {
+        //   ($('.TourType-cmb')).niceSelect('update');
+        // }, 100));
       }
     })
   }
@@ -125,4 +127,5 @@ export class ManageTourListComponent implements OnInit {
 
 
   protected readonly Array = Array;
+  protected readonly filter = filter;
 }

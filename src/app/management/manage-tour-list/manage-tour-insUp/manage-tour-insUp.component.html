@@ -40,7 +40,7 @@
                   <select class="select-nice TourType-cmb" name="tourTypeSelect">
                     @for (tourType of TourTypeSelect; track tourType.Guid) {
                       <option (click)="tourTypeSelectChange(tourType.Guid)" [value]="tourType.Guid"
-                              [selected]="incomingTour.TourTypeGuid == tourType.Guid">{{ tourType.Name }}
+                              [selected]="incomingTour.TourTypeGuid == tourType.Guid">{{ tourType.Value }}
                       </option>
                     }
                   </select>
@@ -52,7 +52,7 @@
                   <select class="select-nice TransportType-cmb" id="transportType"> required>
                     @for (transportType of TransportTypeSelect; track $index) {
                       <option [value]="transportType.Guid"
-                              [selected]="incomingTour.TransportTypeGuid == transportType.Guid">{{ transportType.Name }}
+                              [selected]="incomingTour.TransportTypeGuid == transportType.Guid">{{ transportType.Value }}
                       </option>
                     }
                   </select>

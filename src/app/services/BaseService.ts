@@ -3,19 +3,18 @@ import {environment} from '../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {BaseResponse} from '../Models/BaseResponse';
-import {TransportType} from '../Models/TransportType/TransportType';
 import {Combo} from '../Models/GenericModels/Combo';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TransportTypeService {
+export class BaseService {
   private baseUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) { }
-
-  GetAll(): Observable<BaseResponse<TransportType[]>> {
-    return this.http.get<BaseResponse<TransportType[]>>(this.baseUrl + "TransportType/GetAll");
+  constructor(private http: HttpClient) {
   }
 
+  GetForCombo(EntityName: string): Observable<BaseResponse<Combo[]>> {
+    return this.http.get<BaseResponse<Combo[]>>(this.baseUrl + `Base/combo/${EntityName}`);
+  }
 }

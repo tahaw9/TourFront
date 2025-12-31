@@ -1,1 +1,346 @@
-<p>manage-tour-info-list works!</p>
+<div class="tour-management-container">
+  <!-- هدر صفحه -->
+  <div class="header-section">
+    <h1 class="page-title">
+      <i class="bi bi-geo-alt-fill"></i>
+      مدیریت تورها
+    </h1>
+    <div class="action-buttons">
+      <button class="btn btn-outline">
+        <i class="bi bi-filter"></i>
+        فیلترها
+      </button>
+      <button (click)="OpenInsertForm()" type="button" class="btn btn-primary">
+        <i class="bi bi-plus-circle"></i>
+        افزودن تور جدید
+      </button>
+    </div>
+  </div>
+
+  <div class="filter-section">
+    <div class="filter-group">
+      <label class="filter-label">عنوان تور</label>
+      <input [(ngModel)]="filter.tourTitle" type="text" class="filter-input" placeholder="نام تور...">
+
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <label class="form-label small">تاریخ شروع (از)</label>
+        <qeydar-date-picker (onChangeValue)="onDateChange('startDateFrom')($event)" [showSidebar]="false" [rtl]="true" [placement]="'bottomRight'" [readOnlyInput]="true" [ngModel]="filter.startDateFrom"
+                            [calendarType]="'jalali'" placeholder="تاریخ انتخاب کنید"></qeydar-date-picker>
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label small">تاریخ شروع (تا)</label>
+        <qeydar-date-picker (onChangeValue)="onDateChange('startDateTo')($event)" [rtl]="true" [showSidebar]="false" [placement]="'bottomRight'" [readOnlyInput]="true" [ngModel]="filter.startDateTo"
+                            [calendarType]="'jalali'" placeholder="تاریخ انتخاب کنید"></qeydar-date-picker>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 mb-2">
+        <app-base-select-nice
+          [items]="transportTypeCombo"
+          label="وسیله نقلیه"
+          bindLabel="Name"
+          bindValue="Guid"
+          placeholder="وسیله نقلیه"
+          [(ngModel)]="filter.transportTypeGuid"
+          >
+        </app-base-select-nice>
+      </div>
+      <div class="col-md-4 mb-2">
+        <app-base-select-nice
+          [items]="tourTypeCombo"
+          label="نوع تور"
+          bindLabel="Name"
+          bindValue="Guid"
+          placeholder="نوع تور"
+          [(ngModel)]="filter.tourTypeGuid"
+          (change)="tourTypeFilterChange($event)">
+        </app-base-select-nice>
+      </div>
+      <div class="col-md-4 mb-2">
+        <app-base-select-nice
+          [items]="statusOptions"
+          label="وضعیت"
+          bindLabel="label"
+          bindValue="value"
+          placeholder="وضعیت"
+          [(ngModel)]="filter.status"
+        >
+        </app-base-select-nice>
+      </div>
+      <div class="col-md-4 mb-2">
+        <app-base-select-nice
+          [items]="locationCombo"
+          label="مبدا"
+          bindLabel="Name"
+          bindValue="Guid"
+          placeholder="مبدا"
+          [(ngModel)]="filter.originGuid"
+        >
+        </app-base-select-nice>
+      </div>
+      <div class="col-md-4 mb-2">
+        <app-base-select-nice
+          [items]="locationCombo"
+          label="مقصد"
+          bindLabel="Name"
+          bindValue="Guid"
+          placeholder="مقصد"
+          [(ngModel)]="filter.destinationGuid"
+        >
+        </app-base-select-nice>
+      </div>
+    </div>
+    <div class="filter-group d-flex gap-2">
+      <button (click)="SearchWithFilters()" class="btn btn-primary" style="height: 45px;">
+        اعمال فیلترها
+      </button>
+
+      <button (click)="ClearFilters()" class="btn btn-danger" style="height: 45px;">
+        حذف فیلترها
+      </button>
+    </div>
+  </div>
+
+
+
+  <div class="filter-section p-3 mb-4 border rounded bg-white">
+
+    <h5 class="mb-3 text-muted">جستجو و فیلتر پیشرفته</h5>
+
+    <!-- Row 1: Basic Search & Types -->
+    <label class="filter-label">وضعیت</label>
+    <div class="management-select filter-group rel z-3">
+      <select class="select-nice ms-xl-auto">
+        <option value="default" selected="">وضعیت</option>
+        <option value="1-star">1 ستاره</option>
+        <option value="2-star">2 ستاره</option>
+        <option value="3-star">3 ستاره</option>
+        <option value="4-star">4 ستاره</option>
+        <option value="5-star">5 ستاره</option>
+      </select>
+    </div>
+    <div class="row g-3 mb-3">
+
+      <!-- Tour Title -->
+      <div class="col-md-3">
+        <label class="form-label small">عنوان تور</label>
+        <input [(ngModel)]="filter.tourTitle" type="text" class="form-control" placeholder="نام تور...">
+      </div>
+
+      <!-- Tour Type -->
+
+
+      <!-- Transport Type -->
+      <div class="col-md-3 management-select">
+        <label class="form-label small">وسیله نقلیه</label>
+        <select [(ngModel)]="filter.transportTypeGuid" class="form-select select-nice">
+          <option [ngValue]="null">همه</option>
+          @for (item of transportTypeCombo; track item.guid) {
+            <option [value]="item.guid">{{ item.name }}</option>
+          }
+        </select>
+      </div>
+
+      <!-- Status -->
+      <div class="col-md-3 management-select">
+        <label class="form-label small">وضعیت</label>
+        <select [(ngModel)]="filter.status" class="form-select select-nice">
+          <option [ngValue]="null">همه وضعیت‌ها</option>
+          @for (st of statusOptions; track st.value) {
+            <option [value]="st.value">{{ st.label }}</option>
+          }
+        </select>
+      </div>
+    </div>
+
+    <!-- Row 2: Locations & Dates -->
+    <div class="row g-3 mb-3">
+
+      <!-- Origin -->
+      <div class="col-md-3 management-select">
+        <label class="form-label small">مبدا</label>
+        <select [(ngModel)]="filter.originGuid" class="form-select">
+          <option [ngValue]="null">همه شهرها</option>
+          @for (loc of locationCombo; track loc.guid) {
+            <option [value]="loc.guid">{{ loc.name }}</option>
+          }
+        </select>
+      </div>
+
+      <!-- Destination -->
+      <div class="col-md-3 management-select">
+        <label class="form-label small">مقصد</label>
+        <select [(ngModel)]="filter.destinationGuid" class="form-select">
+          <option [ngValue]="null">همه شهرها</option>
+          @for (loc of locationCombo; track loc.guid) {
+            <option [value]="loc.guid">{{ loc.name }}</option>
+          }
+        </select>
+      </div>
+
+      <!-- Date Range (Start Date) -->
+      <!-- Note: For Persian Date, replace type="date" with your Persian Datepicker component -->
+      <div class="col-md-3">
+        <label class="form-label small">تاریخ شروع (از)</label>
+        <input [(ngModel)]="filter.startDateFrom" type="date" class="form-control">
+      </div>
+
+      <div class="col-md-3">
+        <label class="form-label small">تاریخ شروع (تا)</label>
+        <input [(ngModel)]="filter.startDateTo" type="date" class="form-control">
+      </div>
+    </div>
+
+    <!-- Row 3: Capacity & Checkboxes -->
+    <div class="row g-3 align-items-end">
+
+      <!-- Min Available Seats -->
+      <div class="col-md-2">
+        <label class="form-label small">حداقل ظرفیت خالی</label>
+        <input [(ngModel)]="filter.minAvailableSeats" type="number" class="form-control" min="0">
+      </div>
+
+      <!-- Checkboxes -->
+      <div class="col-md-4 d-flex gap-3 pt-2">
+        <div class="form-check">
+          <input [(ngModel)]="filter.hasAvailableSeats" class="form-check-input" type="checkbox" id="chkSeats">
+          <label class="form-check-label" for="chkSeats">فقط دارای ظرفیت</label>
+        </div>
+
+        <div class="form-check">
+          <input [(ngModel)]="filter.isCanceled" class="form-check-input" type="checkbox" id="chkCancel">
+          <label class="form-check-label" for="chkCancel">نمایش لغو شده‌ها</label>
+        </div>
+
+        <div class="form-check">
+          <input [(ngModel)]="filter.isPast" class="form-check-input" type="checkbox" id="chkPast">
+          <label class="form-check-label" for="chkPast">نمایش تورهای گذشته</label>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="col-md-6 text-end">
+        <button (click)="ClearFilters()" class="btn btn-outline-danger me-2">
+          <i class="fa fa-times"></i> حذف فیلترها
+        </button>
+        <button (click)="SearchWithFilters()" class="btn btn-primary px-4">
+          <i class="fa fa-search"></i> جستجو
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- کارت‌های آمار -->
+  <div class="stats-cards">
+    <div class="stat-card">
+      <div class="stat-icon icon-primary">
+        <i class="bi bi-house-door"></i>
+      </div>
+      <div class="stat-info">
+        <h3>۴۲</h3>
+        <p>چادرگردانی</p>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon icon-success">
+        <i class="bi bi-water"></i>
+      </div>
+      <div class="stat-info">
+        <h3>۲۸</h3>
+        <p>کایاک سواری</p>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon icon-warning">
+        <i class="bi bi-bicycle"></i>
+      </div>
+      <div class="stat-info">
+        <h3>۳۵</h3>
+        <p>دوچرخه سواری</p>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon icon-danger">
+        <i class="bi bi-fish"></i>
+      </div>
+      <div class="stat-info">
+        <h3>۱۹</h3>
+        <p>ماهیگیری</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- جدول تورها -->
+  <div class="tours-table-container">
+    <div class="table-header">
+      <h3 class="table-title">لیست تورها</h3>
+      <div class="search-box">
+        <input type="text" class="search-input" placeholder="جستجوی تور...">
+        <i class="bi bi-search search-icon"></i>
+      </div>
+    </div>
+
+    @if (!!BindPagingError) {
+      <div class="row text-center">
+        <span>{{ BindPagingError }}</span>
+      </div>
+    } @else {
+      <div class="table-responsive">
+        <table class="tours-table">
+          <thead>
+          <tr>
+            <th>ردیف</th>
+            <th>نام تور</th>
+            <th>نوع</th>
+            <th>مبدا</th>
+            <th>حمل و نقل</th>
+            <th>مقصد</th>
+            <th>قیمت</th>
+            <th>وضعیت</th>
+            <th>عملیات</th>
+          </tr>
+          </thead>
+          <tbody>
+            @for (tourInfo of TourInfoList; track $index) {
+              <tr>
+                <td>{{ ((BasePaginationFilter.PageSize * (BasePaginationFilter.PageNumber - 1)) + $index + 1) | persianNumber }}</td>
+                <td>{{ tourInfo.TourTitle }}</td>
+                <td>{{ tourInfo.AvailableSeats }}</td>
+                <td>{{ tourInfo.Capacity }}</td>
+                <td>{{ tourInfo.TourLeaderName }}</td>
+                <td>{{ tourInfo.IsCanceled }}</td>
+                <td>{{ tourInfo.StartDate | shamsi:'short' }}</td>
+                <td><span class="status-badge status-active">فعال</span></td>
+                <td>
+                  <div class="action-buttons">
+                    <button class="action-btn btn-view"><i class="bi bi-eye"></i></button>
+                    <button (click)="OpenEditForm(tourInfo)" class="action-btn btn-edit"><i class="bi bi-pencil"></i>
+                    </button>
+                    <button class="action-btn btn-delete"><i class="bi bi-trash"></i></button>
+                  </div>
+                </td>
+              </tr>
+
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+
+
+    <!-- صفحه‌بندی -->
+    <app-management-paging
+      [pageNumber]="BasePaginationFilter.PageNumber"
+      [pageSize]="BasePaginationFilter.PageSize"
+      [totalCount]="TourInfoListBaseResponse?.DataCount || 0"
+      [maxPagesToShow]="2"
+      (pageChange)="onPageChange($event)">
+    </app-management-paging>
+  </div>
+</div>

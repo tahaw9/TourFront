@@ -1,0 +1,19 @@
+@if (!!label) {
+  <label class="select-nice-label small d-block">
+    {{ label }}
+  </label>
+}
+<div class="management-select filter-group rel z-3">
+  <select #selectRef [disabled]="disabled" [value]="value">
+
+    <!-- Placeholder Option -->
+    <option value="" disabled selected>{{ placeholder }}</option>
+
+    <!-- Dynamic Options -->
+    @for (item of items; track $index) {
+      <option [value]="item[bindValue]">{{ item[bindLabel] }}
+      </option>
+    }
+
+  </select>
+</div>

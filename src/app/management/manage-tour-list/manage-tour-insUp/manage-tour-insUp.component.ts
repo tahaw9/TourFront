@@ -2,7 +2,6 @@ import {Component, ElementRef, OnInit, Renderer2, SimpleChanges, ViewChild} from
 import {ActivatedRoute, Router} from '@angular/router';
 import {TourList} from '../../../Models/Tour/TourList';
 import {FormControl, FormsModule, NgForm, ReactiveFormsModule} from '@angular/forms';
-import {TourType} from '../../../Models/TourType/TourType';
 import {TourTypeService} from '../../../services/TourTypeService';
 import {HttpClientModule} from '@angular/common/http';
 import {DatepickerDirective} from '../../../directives/datepicker.directive';
@@ -13,11 +12,10 @@ import {catchError, debounceTime, distinctUntilChanged, finalize, switchMap, tap
 import {filter} from 'rxjs/operators';
 import {LocationService} from '../../../services/LocationService';
 import {PersianCurrencyDirective} from '../../../directives/persian-currency-directive';
-import {TransportTypeService} from '../../../services/TransportTypeService';
-import {TransportType} from '../../../Models/TransportType/TransportType';
 import {TourService} from '../../../services/TourService';
 import {environment} from '../../../environments/environment';
-import {BaseResponse} from '../../../Models/BaseResponse';
+import {Combo} from '../../../Models/GenericModels/Combo';
+import {BaseService} from '../../../services/BaseService';
 
 @Component({
   selector: 'app-manage-tour-insUp',
@@ -30,15 +28,15 @@ import {BaseResponse} from '../../../Models/BaseResponse';
     PersianCurrencyDirective,
   ],
   styleUrls: ['./manage-tour-insUp.component.scss'],
-  providers: [TourTypeService, LocationService, TransportTypeService, TourService, FileUrlPipe]
+  providers: [TourTypeService, LocationService, TourService, BaseService, FileUrlPipe]
 })
 export class ManageTourInsUpComponent implements OnInit {
 
   incomingTour: TourList = new TourList();
   insertTourModel: TourInsUp = new TourInsUp();
   PageType : number = 0;
-  TourTypeSelect: TourType[] = [];
-  TransportTypeSelect: TransportType[] = [];
+  TourTypeSelect: Combo[] = [];
+  TransportTypeSelect: Combo[] = [];
 
   destinationSearchControl: FormControl = new FormControl('');
   destinationSearchResult: LocationSearchResultCmb[] | null = [];
@@ -50,7 +48,7 @@ export class ManageTourInsUpComponent implements OnInit {
   @ViewChild('dp1') dp1!: DatepickerDirective;
 
   constructor(private route: ActivatedRoute,private router: Router,private el: ElementRef,private renderer: Renderer2
-              ,private  TourService: TourService,private FileUrlPipe: FileUrlPipe, private  TourTypeService: TourTypeService, private LocationService: LocationService, private TransportTypeService: TransportTypeService) {
+              ,private  TourService: TourService, private BaseService: BaseService,private FileUrlPipe: FileUrlPipe, private  TourTypeService: TourTypeService, private LocationService: LocationService) {
     this.BindTourTypeFilter();
     this.BindTransportTypeFilter();
   }
@@ -164,7 +162,7 @@ export class ManageTourInsUpComponent implements OnInit {
   }
 
   BindTourTypeFilter(){
-    this.TourTypeService.GetAll().subscribe(response => {
+    this.BaseService.GetForCombo("TourType").subscribe(response => {
       if (!response.succcess) {
         console.log(response.Message);
       }
@@ -179,7 +177,7 @@ export class ManageTourInsUpComponent implements OnInit {
   }
 
   BindTransportTypeFilter(){
-    this.TransportTypeService.GetAll().subscribe(response => {
+    this.BaseService.GetForCombo("TransportType").subscribe(response => {
       if (!response.succcess) {
         console.log(response.Message);
       }

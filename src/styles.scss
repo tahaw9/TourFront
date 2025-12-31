@@ -25,13 +25,18 @@ input:focus {
   scroll-margin-top: 0 !important;
   scroll-behavior: auto !important;
 }
-
+.cdk-overlay-container{
+  position: fixed;
+  z-index: 2000!important;
+}
 /* تنظیمات مخصوص موبایل  datepicker*/
 @media (max-width: 640px) {
   .cdk-overlay-container .date-picker-popup {
     width: 20rem !important;
   }
   .cdk-overlay-container {
-    left: 14% !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%);
   }
 }

@@ -23,23 +23,31 @@
       <label class="filter-label">جستجو</label>
       <input [(ngModel)]="TourNameFilter" type="text" class="filter-input" placeholder="نام تور یا مقصد...">
     </div>
-    <div class="management-select filter-group rel z-3">
-      <select class="select-nice ms-xl-auto TourType-cmb">
-        @for (tourType of TourTypeCombo; track tourType.Guid) {
-          <option (click)="tourTypeFilterChange(tourType.Guid)" [value]="tourType.Guid"
-                  selected="">{{ tourType.Name }}
-          </option>
-        }
-      </select>
-      <select class="select-nice ms-xl-auto">
-        <option value="default" selected="">وضعیت</option>
-        <option value="1-star">1 ستاره</option>
-        <option value="2-star">2 ستاره</option>
-        <option value="3-star">3 ستاره</option>
-        <option value="4-star">4 ستاره</option>
-        <option value="5-star">5 ستاره</option>
-      </select>
+    <div class="row">
+      <div class="col-md-6">
+        <app-base-select-nice
+          [items]="TourTypeCombo"
+          label="نوع تور"
+          bindLabel="Name"
+          bindValue="Guid"
+          placeholder="نوع تور"
+          [(ngModel)]="TourTypeGuidFilter"
+          (change)="tourTypeFilterChange($event)">
+        </app-base-select-nice>
+      </div>
+      <div class="col-md-6">
+        <app-base-select-nice
+          [items]="TourTypeCombo"
+          label="نوع تور"
+          bindLabel="Name"
+          bindValue="Guid"
+          placeholder="نوع تور"
+          [(ngModel)]="TourTypeGuidFilter"
+          (change)="tourTypeFilterChange($event)">
+        </app-base-select-nice>
+      </div>
     </div>
+
     <div class="filter-group d-flex gap-2">
       <button (click)="SearchWithFilters()" class="btn btn-primary" style="height: 45px;">
         اعمال فیلترها
